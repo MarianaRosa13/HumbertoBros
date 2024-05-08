@@ -1,10 +1,13 @@
+# ===== Inicialização =====
+# ----- Importa e inicia pacotes
 import pygame
 
 pygame.init()
 
 # ----- Gera tela principal
-window = pygame.display.set_mode((600, 300))
+window = pygame.display.set_mode((600, 400))
 pygame.display.set_caption('Humberto Bros')
+
 
 INIT = 0
 GAME = 1
@@ -12,60 +15,61 @@ QUIT = 2
 
 state=INIT
 
+
+# # ----- Inicia estruturas de dados
+game = True
+#state=INIT
+# ----- Inicia assets
 def init_screen(screen):
-    #background_ini = pygame.image.load(path.join(IMG_DIR, 'inicio.png')).convert()
-    #background_ini_rect = background.get_rect()
     font1 = pygame.font.SysFont(None, 60)
     font2 = pygame.font.SysFont(None, 40)
     text1 = font1.render('Bem vindo!', True, (255, 0, 0))
     text2 = font1.render('Humberto Bros', True, (255, 0, 0))
     text3 = font2.render('Pressione enter para começar', True, (255, 0, 0))
-    # ----- Gera saídas
     window.fill((255, 255, 255))  # Preenche com a cor branco
-    window.blit(text1, (180, 80))
-    window.blit(text2, (150, 150))
-    window.blit(text3, (140, 230))
-    # Processa os eventos (mouse, teclado, botão, etc).
-    for event in pygame.event.get():
-        # Verifica se foi fechado.
-        if event.type == pygame.QUIT:
-            state = QUIT
-            #running = False
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_KP_ENTER:
-                state = GAME
-                #running = False
+    window.blit(text1, (180, 100))
+    window.blit(text2, (150, 180))
+    window.blit(text3, (100, 250))
+#     # Processa os eventos (mouse, teclado, botão, etc).
+# for event in pygame.event.get():
+#         # Verifica se foi fechado.
+#     if event.type == pygame.QUIT:
+#         state = QUIT
+#             #running = False
+#     if event.type == pygame.KEYUP:
+#         if event.key == pygame.K_KP_ENTER:
+#             state = GAME
+    return screen
+tela_ini = init_screen(window)
 
-
-state = INIT
-while state != QUIT:
-    if state == INIT:
-        state = init_screen(window)
+# state = INIT
+# while state != QUIT:
+#     if state == INIT:
+#         state = init_screen(window)
     #elif state == GAME:
         #state = game_screen(window)
     # else:
     #     state = QUIT
 
-state = GAME
-while state==GAME:
+# ===== Loop principal =====
+# state = GAME
+# while state==GAME:
+while game:
     # ----- Trata eventos
     for event in pygame.event.get():
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
             game = False
 
-    # # ----- Gera saídas
-    # window.fill((255, 255, 255))  # Preenche com a cor branco
-    # window.blit(text1, (180, 80))
-    # window.blit(text2, (150, 150))
-    # window.blit(text3, (150, 150))
 
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
 
 # ===== Finalização =====
-if pygame.KEYUP:
-    pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
+pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
+
+
+
 
 # # assets = {}
 # # assets['background'] = pygame.image.load('referencia\\assets\\img\\starfield.png').convert()
