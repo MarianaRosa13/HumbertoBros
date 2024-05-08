@@ -6,22 +6,49 @@ pygame.init()
 window = pygame.display.set_mode((600, 300))
 pygame.display.set_caption('Humberto Bros')
 
-font = pygame.font.SysFont(None, 60)
-text1 = font.render('Bem vindo!', True, (255, 0, 0))
-text2 = font.render('Humberto Bros', True, (255, 0, 0))
+INIT = 0
+GAME = 1
+QUIT = 2
 
-game = True
-while game==True:
+state=INIT
+
+def init_screen(screen):
+    #background_ini = pygame.image.load(path.join(IMG_DIR, 'inicio.png')).convert()
+    #background_ini_rect = background.get_rect()
+    font1 = pygame.font.SysFont(None, 60)
+    font2 = pygame.font.SysFont(None, 40)
+    text1 = font1.render('Bem vindo!', True, (255, 0, 0))
+    text2 = font1.render('Humberto Bros', True, (255, 0, 0))
+    text3 = font2.render('Pressione enter para começar', True, (255, 0, 0))
+    # ----- Gera saídas
+    window.fill((255, 255, 255))  # Preenche com a cor branco
+    window.blit(text1, (180, 80))
+    window.blit(text2, (150, 150))
+    window.blit(text3, (140, 230))
+
+
+state = INIT
+while state != QUIT:
+    if state == INIT:
+        state = init_screen(window)
+    #elif state == GAME:
+        #state = game_screen(window)
+    # else:
+    #     state = QUIT
+
+state = GAME
+while state==GAME:
     # ----- Trata eventos
     for event in pygame.event.get():
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
             game = False
 
-    # ----- Gera saídas
-    window.fill((255, 255, 255))  # Preenche com a cor branco
-    window.blit(text1, (180, 80))
-    window.blit(text2, (150, 150))
+    # # ----- Gera saídas
+    # window.fill((255, 255, 255))  # Preenche com a cor branco
+    # window.blit(text1, (180, 80))
+    # window.blit(text2, (150, 150))
+    # window.blit(text3, (150, 150))
 
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
