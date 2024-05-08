@@ -1,10 +1,7 @@
-# ===== Inicialização =====
-# ----- Importa e inicia pacotes
 import pygame
 
 pygame.init()
 
-# ----- Gera tela principal
 window = pygame.display.set_mode((600, 400))
 pygame.display.set_caption('Humberto Bros')
 
@@ -15,8 +12,8 @@ QUIT = 2
 
 state=INIT
 
-#background_init = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\WhatsApp Image 2024-05-08 at 17.45.04').convert()
-#background_init = pygame.image.load('Pygame\\HumbertoBros\\assets\\img\\WhatsApp Image 2024-05-08 at 17.45.04').convert()
+#background_1fase = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\WhatsApp Image 2024-05-08 at 17.45.04').convert()
+#background_1fase = pygame.image.load('Pygame\\HumbertoBros\\assets\\img\\WhatsApp Image 2024-05-08 at 17.45.04').convert()
 
 # # ----- Inicia estruturas de dados
 game = True
