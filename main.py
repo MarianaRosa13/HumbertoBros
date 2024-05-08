@@ -15,6 +15,8 @@ QUIT = 2
 
 state=INIT
 
+#background_init = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\WhatsApp Image 2024-05-08 at 17.45.04').convert()
+#background_init = pygame.image.load('Pygame\\HumbertoBros\\assets\\img\\WhatsApp Image 2024-05-08 at 17.45.04').convert()
 
 # # ----- Inicia estruturas de dados
 game = True
@@ -26,7 +28,9 @@ def init_screen(screen):
     text1 = font1.render('Bem vindo!', True, (255, 0, 0))
     text2 = font1.render('Humberto Bros', True, (255, 0, 0))
     text3 = font2.render('Pressione enter para começar', True, (255, 0, 0))
+    backgroud_init = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\Fachada-do-Insper-2.png').convert()
     window.fill((255, 255, 255))  # Preenche com a cor branco
+    window.blit(backgroud_init, (0, 0))
     window.blit(text1, (180, 100))
     window.blit(text2, (150, 180))
     window.blit(text3, (100, 250))
