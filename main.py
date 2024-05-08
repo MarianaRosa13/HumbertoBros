@@ -25,6 +25,16 @@ def init_screen(screen):
     window.blit(text1, (180, 80))
     window.blit(text2, (150, 150))
     window.blit(text3, (140, 230))
+    # Processa os eventos (mouse, teclado, botão, etc).
+    for event in pygame.event.get():
+        # Verifica se foi fechado.
+        if event.type == pygame.QUIT:
+            state = QUIT
+            #running = False
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_KP_ENTER:
+                state = GAME
+                #running = False
 
 
 state = INIT
