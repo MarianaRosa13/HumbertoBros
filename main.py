@@ -38,8 +38,8 @@ class Humberto(pygame.sprite.Sprite):
 
         self.image = assets['Humberto']
         self.rect = self.image.get_rect()
-        self.rect.centerx = 400 #WIDTH / 2
-        self.rect.bottom = 300 #HEIGHT - 10
+        self.rect.centerx = 350 #WIDTH / 2
+        self.rect.bottom = 400 #HEIGHT - 10
         self.speedx = 0
 
     def update(self):
@@ -97,6 +97,10 @@ def init_screen(screen):
 tela_ini = init_screen(window)
 
 
+player = Humberto(assets['Humberto'])
+all_sprites = pygame.sprite.Group()
+all_sprites.add(player)
+all_sprites.draw(window)
 
 
 # while state != QUIT:
