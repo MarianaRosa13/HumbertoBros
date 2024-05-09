@@ -52,14 +52,9 @@ class Humberto(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
 
-# player = Humberto(assets['Humberto'])
-# all_sprites = pygame.sprite.Group()
-# all_sprites.add(player)
-# all_sprites.draw(window)
-
 # # ----- Inicia estruturas de dados
 game = True
-#state=INIT
+state=INIT
 # ----- Inicia assets
 def init_screen(screen):
     font1 = pygame.font.SysFont(None, 60)
@@ -74,23 +69,23 @@ def init_screen(screen):
     window.blit(text1, (250, 120))
     window.blit(text2, (170, 200))
     window.blit(text3, (170, 320))
-#     # Processa os eventos (mouse, teclado, botão, etc).
+    # Processa os eventos (mouse, teclado, botão, etc).
     running = True
-    #while running:
-        # Ajusta a velocidade do jogo.
-        #clock.tick(FPS)
-        # Processa os eventos (mouse, teclado, botão, etc).
-        # for event in pygame.event.get():
-        #     # Verifica se foi fechado.
-        #     if event.type == pygame.QUIT:
-        #         state = QUIT
-        #         running = False
+    # while running:
+    #     #Ajusta a velocidade do jogo.
+    #     #clock.tick(FPS)
+    #     #Processa os eventos (mouse, teclado, botão, etc).
+    #     for event in pygame.event.get():
+    #         # Verifica se foi fechado.
+    #         if event.type == pygame.QUIT:
+    #             state = QUIT
+    #             running = False
 
-        #     if event.type == pygame.KEYUP:
-        #         if event.key == pygame.K_KP_ENTER:
-        #             state = GAME
-        #             fase='1'
-        #             running = False
+    #         if event.type == pygame.KEYDOWN:
+    #             if event.key == pygame.K_KP_ENTER:
+    #                 state = GAME
+    #                 fase='1'
+    #                 running = False
     return screen
 tela_ini = init_screen(window)
 
