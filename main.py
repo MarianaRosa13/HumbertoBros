@@ -14,7 +14,7 @@ state=INIT
 
 #window2 = pygame.display.set_mode((1000, 650))
 #might have to do pygame.display.quit() followed by pygame.display.init()
-background_1fase = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\Entrada-p2-Insper.jpeg').convert()
+background_1fase = pygame.image.load('assets\\img\\Entrada-p2-Insper.jpeg').convert()
 #window.blit(background_1fase, (-200, -100))
 
 
@@ -22,7 +22,7 @@ background_1fase = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\Design
 
 assets = {}
 #assets['background'] = pygame.image.load('referencia\\assets\\img\\starfield.png').convert()
-assets['Humberto'] = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\SpriteHumberto.png').convert_alpha()
+assets['Humberto'] = pygame.image.load('assets\\img\\SpriteHumberto.png').convert_alpha()
 # assets['meteor_img'] = pygame.transform.scale(assets['meteor_img'], (METEOR_WIDTH, METEOR_HEIGHT))
 # assets['ship_img'] = pygame.image.load('referencia\\assets\\img\\playerShip1_orange.png').convert_alpha()
 # assets['ship_img'] = pygame.transform.scale(assets['ship_img'], (SHIP_WIDTH, SHIP_HEIGHT))
@@ -36,7 +36,7 @@ class Humberto(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = img
+        self.image = assets['Humberto']
         self.rect = self.image.get_rect()
         self.rect.centerx = 400 #WIDTH / 2
         self.rect.bottom = 300 #HEIGHT - 10
@@ -63,14 +63,19 @@ def init_screen(screen):
     text1 = font1.render('Bem vindo!', True, (255, 0, 0))
     text2 = font2.render('Humberto Bros', True, (255, 0, 0))
     text3 = font3.render('Pressione enter para começar', True, (255, 0, 0))
-    backgroud_init = pygame.image.load('C:\\Users\\mariv\\OneDrive\\Insper\\DesignSoft\\Pygame\\HumbertoBros\\assets\\img\\Fachada-do-Insper-2.png').convert()
+    backgroud_init = pygame.image.load('assets\\img\\Fachada-do-Insper-2.png').convert()
     window.fill((255, 255, 255))  # Preenche com a cor branco
     window.blit(backgroud_init, (0, -50))
     window.blit(text1, (250, 120))
     window.blit(text2, (170, 200))
     window.blit(text3, (170, 320))
-    # Processa os eventos (mouse, teclado, botão, etc).
-    running = True
+    
+    player = Humberto(assets['Humberto'])
+    all_sprites = pygame.sprite.Group()
+    all_sprites.add(player)
+    all_sprites.draw(window)
+    #Processa os eventos (mouse, teclado, botão, etc).
+    #running = True
     # while running:
     #     #Ajusta a velocidade do jogo.
     #     #clock.tick(FPS)
@@ -86,14 +91,13 @@ def init_screen(screen):
     #                 state = GAME
     #                 fase='1'
     #                 running = False
+    
+
     return screen
 tela_ini = init_screen(window)
 
 
-player = Humberto(assets['Humberto'])
-all_sprites = pygame.sprite.Group()
-all_sprites.add(player)
-all_sprites.draw(window)
+
 
 # while state != QUIT:
 #     if state == INIT:
