@@ -1,9 +1,8 @@
 import pygame
 import random
-from main import * 
+from config import *
 
-
-def init_screen(screen):
+def init_screen(window):
     clock = pygame.time.Clock()
     font1 = pygame.font.SysFont(None, 60)
     font2 = pygame.font.SysFont(None, 80)
@@ -11,15 +10,11 @@ def init_screen(screen):
     text1 = font1.render('Bem vindo!', True, (255, 0, 0))
     text2 = font2.render('Humberto Bros', True, (255, 0, 0))
     text3 = font3.render('Pressione enter para começar', True, (255, 0, 0))
-    backgroud_init = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
-    window.fill((255, 255, 255))  # Preenche com a cor branco
-    window.blit(backgroud_init, (0, -50))
-    window.blit(text1, (250, 120))
-    window.blit(text2, (170, 200))
-    window.blit(text3, (170, 320))
+    inicial = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
+    backgroud_init = pygame.transform.scale(inicial, (BACK_INI_WIDTH, BACK_INI_HEIGHT))
     #Processa os eventos (mouse, teclado, botão, etc)
     running = True
-    while running:
+    while running==True:
         #Ajusta a velocidade do jogo.
         #clock.tick(FPS)
         #Processa os eventos (mouse, teclado, botão, etc)
@@ -32,5 +27,14 @@ def init_screen(screen):
                     #state = GAME
                     fase='1'
                     running = False
-    return screen
-init_screen(window)
+
+        window.fill((255, 255, 255))  # Preenche com a cor branco
+        window.blit(backgroud_init, (0, -50))
+        window.blit(text1, (250, 120))
+        window.blit(text2, (170, 200))
+        window.blit(text3, (170, 320))
+
+        pygame.display.update()
+
+
+    return 1

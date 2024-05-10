@@ -1,103 +1,22 @@
 import pygame
+from config import *
+from assets import *
+from tela_inicial import *
+from game_screen import *
 
 pygame.init()
 pygame.mixer.init()
 
-#tela principal
-WIDTH = 1000
-HEIGHT = 600
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Humberto Bros')
 
-
-HUMBERTO_WIDTH= 400
-HUMBERTO_HEIGHT=400
-# inicia assets 
-def load_assets():
-    assets = {}
-    assets['background1']=pygame.image.load('assets/img/Entrada-p2-Insper.jpeg').convert()
-    assets['background2']=pygame.image.load('assets/img/sala.jpg').convert()
-    assets['background3']=pygame.image.load('assets/img/refeitorio-insper31.jpg').convert()
-    assets['humberto']=pygame.image.load('assets/img/SpriteHumberto.png').convert_alpha()
-    assets['humberto'] = pygame.transform.scale(assets['humberto'], (HUMBERTO_WIDTH, HUMBERTO_HEIGHT))
-    assets['floor'] = pygame.image.load('assets/img/floor.png').convert_alpha()
-    assets['atividade'] = pygame.image.load('assets/img/atividade.png').convert_alpha()
-    assets['humb esq'] = pygame.image.load('assets/img/Humberto_esquerda.png').convert_alpha()
-    assets['humb dir'] = pygame.image.load('assets/img/Humberto_direita.png').convert_alpha()
-    return assets
-#estrutura de dados
-class Humberto(pygame.sprite.Sprite):
-    def __init__(self,groups, assets):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = assets['humberto']
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH/2
-        self.rect.bottom = HEIGHT - 10
-        self.speedx = 0
-        self.speedy = 0
-        self.groups = groups
-        self.assets = assets 
-    def update(self):
-        # Atualização da posição da nave
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
-        # Mantem dentro da tela
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
-
-
-def game_screen(window):
-    # Variável para o ajuste de velocidade
-    clock = pygame.time.Clock()
-    assets = load_assets()
-    #criando jogador
-    all_sprites = pygame.sprite.Group()
-    groups = {}
-    groups['all_sprites'] = all_sprites
-    player = Humberto(groups, assets)
-    all_sprites.add(player)
-    
-
-    DONE = 0
-    PLAYING = 1
-    #EXPLODING = 2
-    state = PLAYING
-    keys_down = {}
-    #loop principal
-    while state != DONE:
-        for event in pygame.event.get():
-            # ----- Verifica consequências
-            if event.type == pygame.QUIT:
-                state = DONE
-            if state == PLAYING:
-                if event.type == pygame.KEYDOWN:
-                    # Dependendo da tecla, altera a velocidade.
-                    keys_down[event.key] = True
-                    if event.key == pygame.K_LEFT:
-                        player.speedx -= 8
-                    if event.key == pygame.K_RIGHT:
-                        player.speedx += 8
-                    if event.key == pygame.K_SPACE:
-                        player.speedy += 5
-                        #wait
-                        #logo depois: player.speedy -= 5
-                if event.type == pygame.KEYUP:
-                    if event.key in keys_down and keys_down[event.key]:
-                        if event.key == pygame.K_LEFT:
-                            player.speedx += 8
-                        if event.key == pygame.K_RIGHT:
-                            player.speedx -= 8 
-
-        window.fill((0, 0, 0))  # Preenche com a cor branca
-        window.blit(assets['background1'], (-200, -100))
-        all_sprites.draw(window)
-        
-        pygame.display.update()
-
-game_screen(window)  
+estado = 0
+while estado != -1:
+    if estado == 0:
+        estado = init_screen(window)
+    if estado == 1:
+        estado = game_screen(window)
+  
 pygame.quit()       
 
 
