@@ -15,9 +15,15 @@ HUMBERTO_HEIGHT=400
 # inicia assets 
 def load_assets():
     assets = {}
-    assets['background']=pygame.image.load('assets/img/Entrada-p2-Insper.jpeg').convert()
+    assets['background1']=pygame.image.load('assets/img/Entrada-p2-Insper.jpeg').convert()
+    assets['background2']=pygame.image.load('assets/img/sala.jpg').convert()
+    assets['background3']=pygame.image.load('assets/img/refeitorio-insper31.jpg').convert()
     assets['humberto']=pygame.image.load('assets/img/SpriteHumberto.png').convert_alpha()
     assets['humberto'] = pygame.transform.scale(assets['humberto'], (HUMBERTO_WIDTH, HUMBERTO_HEIGHT))
+    assets['floor'] = pygame.image.load('assets/img/floor.png').convert_alpha()
+    assets['atividade'] = pygame.image.load('assets/img/atividade.png').convert_alpha()
+    assets['humb esq'] = pygame.image.load('assets/img/Humberto_esquerda.png').convert_alpha()
+    assets['humb dir'] = pygame.image.load('assets/img/Humberto_direita.png').convert_alpha()
     return assets
 #estrutura de dados
 class Humberto(pygame.sprite.Sprite):
@@ -29,22 +35,55 @@ class Humberto(pygame.sprite.Sprite):
         self.rect.centerx = WIDTH/2
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
+        self.speedy = 0
         self.groups = groups
         self.assets = assets 
     def update(self):
         # Atualização da posição da nave
         self.rect.x += self.speedx
+        self.rect.y += self.speedy
 
         # Mantem dentro da tela
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
-        
+
+def init_screen(screen):
+    font1 = pygame.font.SysFont(None, 60)
+    font2 = pygame.font.SysFont(None, 80)
+    font3 = pygame.font.SysFont(None, 40)
+    text1 = font1.render('Bem vindo!', True, (255, 0, 0))
+    text2 = font2.render('Humberto Bros', True, (255, 0, 0))
+    text3 = font3.render('Pressione enter para começar', True, (255, 0, 0))
+    backgroud_init = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
+    window.fill((255, 255, 255))  # Preenche com a cor branco
+    window.blit(backgroud_init, (0, -50))
+    window.blit(text1, (250, 120))
+    window.blit(text2, (170, 200))
+    window.blit(text3, (170, 320))
+    #Processa os eventos (mouse, teclado, botão, etc)
+    running = True
+    while running:
+        #Ajusta a velocidade do jogo.
+        #clock.tick(FPS)
+        #Processa os eventos (mouse, teclado, botão, etc)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                #state = QUIT
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_KP_ENTER:
+                    #state = GAME
+                    fase='1'
+                    running = False
+    return screen
+init_screen(window)
+
+
 def game_screen(window):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
-
     assets = load_assets()
     #criando jogador
     all_sprites = pygame.sprite.Group()
@@ -52,13 +91,11 @@ def game_screen(window):
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets)
     all_sprites.add(player)
-
-    # Criando os meteoros
     
 
     DONE = 0
     PLAYING = 1
-    EXPLODING = 2
+    #EXPLODING = 2
     state = PLAYING
     keys_down = {}
     #loop principal
@@ -76,21 +113,19 @@ def game_screen(window):
                     if event.key == pygame.K_RIGHT:
                         player.speedx += 8
                     if event.key == pygame.K_SPACE:
-                        player.shoot()
-                # Verifica se soltou alguma tecla.
+                        player.speedy += 5
+                        #wait
+                        #logo depois: player.speedy -= 5
                 if event.type == pygame.KEYUP:
-                    # Dependendo da tecla, altera a velocidade.
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
                             player.speedx += 8
                         if event.key == pygame.K_RIGHT:
                             player.speedx -= 8 
 
-        # ----- Gera saídas
         window.fill((0, 0, 0))  # Preenche com a cor branca
-        window.blit(assets['background'], (0, 0))
+        window.blit(assets['background1'], (-200, -100))
         all_sprites.draw(window)
-        # Desenhando meteoros
         
         pygame.display.update()
 
@@ -104,30 +139,6 @@ pygame.quit()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''#import pygame
-#import os
-
-#pygame.init()
-#pygame.mixer.init()
 
 #window = pygame.display.set_mode((700, 500))
 #pygame.display.set_caption('Humberto Bros')
@@ -169,65 +180,64 @@ pygame.quit()
 #        self.rect.bottom = 400 #HEIGHT - 10
 #        self.speedx = 0
 
-    def update(self):
-        # Atualização da posição da nave
-        self.rect.x += self.speedx
+    # def update(self):
+    #     # Atualização da posição da nave
+    #     self.rect.x += self.speedx
 
-        # Mantem dentro da tela
-        if self.rect.right > 600: #WIDTH:
-            self.rect.right = 600 #WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
+    #     # Mantem dentro da tela
+    #     if self.rect.right > 600: #WIDTH:
+    #         self.rect.right = 600 #WIDTH
+    #     if self.rect.left < 0:
+    #         self.rect.left = 0
 
 # # ----- Inicia estruturas de dados
-game = True
-state=INIT
-# ----- Inicia assets
-def init_screen(screen):
-    font1 = pygame.font.SysFont(None, 60)
-    font2 = pygame.font.SysFont(None, 80)
-    font3 = pygame.font.SysFont(None, 40)
-    text1 = font1.render('Bem vindo!', True, (255, 0, 0))
-    text2 = font2.render('Humberto Bros', True, (255, 0, 0))
-    text3 = font3.render('Pressione enter para começar', True, (255, 0, 0))
-    backgroud_init = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
-    window.fill((255, 255, 255))  # Preenche com a cor branco
-    window.blit(backgroud_init, (0, -50))
-    window.blit(text1, (250, 120))
-    window.blit(text2, (170, 200))
-    window.blit(text3, (170, 320))
+# game = True
+# state=INIT
+# # ----- Inicia assets
+# def init_screen(screen):
+#     font1 = pygame.font.SysFont(None, 60)
+#     font2 = pygame.font.SysFont(None, 80)
+#     font3 = pygame.font.SysFont(None, 40)
+#     text1 = font1.render('Bem vindo!', True, (255, 0, 0))
+#     text2 = font2.render('Humberto Bros', True, (255, 0, 0))
+#     text3 = font3.render('Pressione enter para começar', True, (255, 0, 0))
+#     backgroud_init = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
+#     window.fill((255, 255, 255))  # Preenche com a cor branco
+#     window.blit(backgroud_init, (0, -50))
+#     window.blit(text1, (250, 120))
+#     window.blit(text2, (170, 200))
+#     window.blit(text3, (170, 320))
     
-    player = Humberto(assets['Humberto'])
-    all_sprites = pygame.sprite.Group()
-    all_sprites.add(player)
-    all_sprites.draw(window)
-    #Processa os eventos (mouse, teclado, botão, etc).
-    #running = True
-    # while running:
-    #     #Ajusta a velocidade do jogo.
-    #     #clock.tick(FPS)
-    #     #Processa os eventos (mouse, teclado, botão, etc).
-    #     for event in pygame.event.get():
-    #         # Verifica se foi fechado.
-    #         if event.type == pygame.QUIT:
-    #             state = QUIT
-    #             running = False
+#     player = Humberto(assets['Humberto'])
+#     all_sprites = pygame.sprite.Group()
+#     all_sprites.add(player)
+#     all_sprites.draw(window)
+#     #Processa os eventos (mouse, teclado, botão, etc).
+#     running = True
+#     while running:
+#         #Ajusta a velocidade do jogo.
+#         #clock.tick(FPS)
+#         #Processa os eventos (mouse, teclado, botão, etc).
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 #state = QUIT
+#                 running = False
 
-    #         if event.type == pygame.KEYDOWN:
-    #             if event.key == pygame.K_KP_ENTER:
-    #                 state = GAME
-    #                 fase='1'
-    #                 running = False
+#             if event.type == pygame.KEYDOWN:
+#                 if event.key == pygame.K_KP_ENTER:
+#                     #state = GAME
+#                     fase='1'
+#                     running = False
     
 
-    return screen
-tela_ini = init_screen(window)
+#     return screen
+# tela_ini = init_screen(window)
 
 
-player = Humberto(assets['Humberto'])
-all_sprites = pygame.sprite.Group()
-all_sprites.add(player)
-all_sprites.draw(window)
+# player = Humberto(assets['Humberto'])
+# all_sprites = pygame.sprite.Group()
+# all_sprites.add(player)
+# all_sprites.draw(window)
 
 
 # while state != QUIT:
@@ -247,16 +257,16 @@ all_sprites.draw(window)
 # ===== Loop principal =====
 # state = GAME
 # while state==GAME:
-while game:
-    # ----- Trata eventos
-    for event in pygame.event.get():
-        # ----- Verifica consequências
-        if event.type == pygame.QUIT:
-            game = False
+# while game:
+#     # ----- Trata eventos
+#     for event in pygame.event.get():
+#         # ----- Verifica consequências
+#         if event.type == pygame.QUIT:
+#             game = False
 
 
-    # ----- Atualiza estado do jogo
-    pygame.display.update()  # Mostra o novo frame para o jogador
+#     # ----- Atualiza estado do jogo
+#     pygame.display.update()  # Mostra o novo frame para o jogador
 
-# ===== Finalização =====
-pygame.quit()'''  # Função do PyGame que finaliza os recursos utilizados
+# # ===== Finalização =====
+# pygame.quit()'''  # Função do PyGame que finaliza os recursos utilizados
