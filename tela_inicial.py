@@ -17,5 +17,20 @@ def init_screen(screen):
     window.blit(text1, (250, 120))
     window.blit(text2, (170, 200))
     window.blit(text3, (170, 320))
+    #Processa os eventos (mouse, teclado, botão, etc)
+    running = True
+    while running:
+        #Ajusta a velocidade do jogo.
+        #clock.tick(FPS)
+        #Processa os eventos (mouse, teclado, botão, etc)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                #state = QUIT
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_KP_ENTER:
+                    #state = GAME
+                    fase='1'
+                    running = False
     return screen
-tela_ini = init_screen(window)
+init_screen(window)
