@@ -23,18 +23,15 @@ def init_screen(window):
                 #state = QUIT
                 running = False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_KP_ENTER:
+                #if event.key == pygame.K_KP_ENTER:
                     #state = GAME
-                    fase='1'
-                    running = False
+                fase='1'
+                running = False
 
         window.fill((255, 255, 255))  # Preenche com a cor branco
         window.blit(backgroud_init, (0, -50))
-        window.blit(text1, (250, 120))
-        window.blit(text2, (170, 200))
-        window.blit(text3, (170, 320))
-
+        window.blit(text1, (400, 150))
+        window.blit(text2, (320, 250))
+        window.blit(text3, (320, 400))
         pygame.display.update()
-
-
     return 1

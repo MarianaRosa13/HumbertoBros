@@ -18,10 +18,10 @@ class Humberto(pygame.sprite.Sprite):
         self.groups = groups
         self.assets = assets 
     def update(self):
-        # Atualização da posição da nave
+        #Atualização da posição do Humberto
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # Mantem dentro da tela
+        #Mantem o HUmberto na tela
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
