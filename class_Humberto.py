@@ -2,9 +2,6 @@ import pygame
 from config import *
 
 
-# WIDTH = 1000
-# HEIGHT = 600
-
 class Humberto(pygame.sprite.Sprite):
     def __init__(self,groups, assets, x, y):
         pygame.sprite.Sprite.__init__(self)

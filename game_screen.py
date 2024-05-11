@@ -18,15 +18,25 @@ def game_screen(window):
     chao = Floor(groups, assets)
     all_sprites.add(chao)
     all_floors.add(chao)
-    
-
     DONE = 0
     PLAYING = 1
-    #EXPLODING = 2
     state = PLAYING
     keys_down = {}
+
+
+    # score = 0
+    # lives = 3
+
+
+
+
+
+
+
+
     #loop principal
     while state != DONE:
+        #clock.tick(FPS)
         for event in pygame.event.get():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
@@ -36,24 +46,33 @@ def game_screen(window):
                     # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
                     if event.key == pygame.K_LEFT:
-                        player.speedx -= 8
+                        player.speedx -= 1
                     if event.key == pygame.K_RIGHT:
-                        player.speedx += 8
+                        player.speedx += 1
                     if event.key == pygame.K_SPACE:
-                        player.speedy += 5
-                        #wait
-                        #logo depois: player.speedy -= 5
+                        player.speedy -= 1
+                        #clock.tick(TEMP_VOO)
+                        # delay=1
+                        # pygame.display.flip()
+                        # pygame.event.pump()
+                        # pygame.time.delay(delay * 1000) # 1 second == 1000 milliseconds
+                        # player.speedy += 1
                 if event.type == pygame.KEYUP:
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
-                            player.speedx += 8
+                            player.speedx += 1
                         if event.key == pygame.K_RIGHT:
-                            player.speedx -= 8 
+                            player.speedx -= 1
 
         all_sprites.update()
 
-        hits = pygame.sprite.spritecollide(player, all_floors, False)
-        if len(hits) > 0:
+        
+        # if keys_down[K_SPACE] == True:
+        #     player.speedy += 1
+
+
+        hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
+        if len(hits_floor) > 0:
             player.speedy = 0
 
         window.fill((0, 0, 0))  # Preenche com a cor branca
@@ -61,4 +80,8 @@ def game_screen(window):
         all_sprites.draw(window)
         
         pygame.display.update()
+
+        # if keys_down[K_SPACE] == True:
+        #     player.speedy += 1
+
     return -1
