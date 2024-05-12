@@ -74,6 +74,8 @@ def game_screen(window):
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
         if len(hits_floor) > 0:
             player.speedy = 0
+        else:
+            player.speedy = 1
 
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(assets['background1'], (-200, -100))
