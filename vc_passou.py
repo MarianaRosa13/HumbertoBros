@@ -2,7 +2,7 @@ import pygame
 import random
 from config import *
 
-def init_screen(window):
+def passou_screen(window):
     clock = pygame.time.Clock()
     font1 = pygame.font.SysFont(None, 80)
     font2 = pygame.font.SysFont(None, 60)
@@ -24,7 +24,7 @@ def init_screen(window):
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
                     #state = GAME
-                fase='1'
+                fase='1' #antes + 1
                 running = False
 
         window.fill((0, 0, 255))  # Preenche com a cor azul

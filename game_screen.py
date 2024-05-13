@@ -11,13 +11,16 @@ def game_screen(window):
     #criando jogador
     all_sprites = pygame.sprite.Group()
     all_floors = pygame.sprite.Group()
+    all_alunos = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets, 100, 70)
     all_sprites.add(player)
     chao = Floor(groups, assets)
+    #aluno = Alunos(groups, assets)
     all_sprites.add(chao)
     all_floors.add(chao)
+    #all_alunos.add(aluno)
     DONE = 0
     PLAYING = 1
     state = PLAYING
@@ -78,6 +81,13 @@ def game_screen(window):
             player.speedy = 0
         else:
             player.toca_chao = False
+        
+
+        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, True)
+        # if len(hits_aluno) > 0:
+        #     aluno.kill()
+        #     sprite humberto acabado
+        #     tela vc perdeu
 
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(assets['background1'], (-200, -100))
