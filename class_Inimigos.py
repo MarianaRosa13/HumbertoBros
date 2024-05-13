@@ -18,5 +18,6 @@ class Inimigo(pygame.sprite.Sprite):
         #self.rect.y += self.speedy
         if self.rect.right < 0 or self.rect.left > WIDTH: #or self.rect.right<tam chao or self.rect.left>tam chao
             self.rect.x -= self.speedx
+            #self.image = assets['aluno_d']
             #self.rect.x = random.randint(-100, WIDTH-ALUNO_WIDTH)
             self.speedx = random.randint(-1, 1)

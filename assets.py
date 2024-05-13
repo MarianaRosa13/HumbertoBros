@@ -16,6 +16,8 @@ def load_assets():
     assets['humb dir'] = pygame.image.load('assets/img/Humberto_direita.png').convert_alpha()
     assets['aluno']=pygame.image.load('assets/img/aluno.png').convert_alpha()
     assets['aluno'] = pygame.transform.scale(assets['aluno'], (ALUNO_WIDTH, ALUNO_HEIGHT))
+    assets['aluno_d']=pygame.image.load('assets/img/aluno_direita.png').convert_alpha()
+    assets['aluno_d'] = pygame.transform.scale(assets['aluno_d'], (ALUNO_WIDTH, ALUNO_HEIGHT))
     assets['aluno_direita']=pygame.image.load('assets/img/Humberto_direita.png').convert_alpha()
     assets['humberto_cansado']=pygame.image.load('assets/img/Humberto_cansado.png').convert_alpha()
     assets['humberto_cansado'] = pygame.transform.scale(assets['humberto_cansado'], (HUMBERTO_WIDTH, HUMBERTO_HEIGHT))
