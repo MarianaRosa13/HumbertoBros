@@ -14,4 +14,6 @@ def load_assets():
     assets['atividade'] = pygame.image.load('assets/img/atividade.png').convert_alpha()
     assets['humb esq'] = pygame.image.load('assets/img/Humberto_esquerda.png').convert_alpha()
     assets['humb dir'] = pygame.image.load('assets/img/Humberto_direita.png').convert_alpha()
+    assets['aluno']=pygame.image.load('assets/img/aluno.png').convert_alpha()
+    assets['aluno'] = pygame.transform.scale(assets['aluno'], (ALUNO_WIDTH, ALUNO_HEIGHT))
     return assets
