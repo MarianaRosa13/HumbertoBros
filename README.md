@@ -15,3 +15,7 @@ Criadores:
 Lucca Niklaus
 Mariana Rosa
 Stefane Rodrigues
+
+Créditos:
+efeitos sonoros:https://www.youtube.com/watch?v=EDBhKDuEMoM
+Trilha sonora:https://www.youtube.com/watch?v=mdFrn89x74k
