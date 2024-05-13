@@ -47,12 +47,15 @@ def game_screen(window):
                 if event.type == pygame.KEYDOWN:
                     # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
+                    if event.key == pygame.K_SPACE and player.toca_chao == True:
+                        print('pula')
+                        player.speedy -= 15
                     if event.key == pygame.K_LEFT:
+                        print('esquerda')
                         player.speedx -= 1
                     if event.key == pygame.K_RIGHT:
+                        print('direita')
                         player.speedx += 1
-                    if event.key == pygame.K_SPACE and player.toca_chao == True:
-                        player.speedy -= 15
                 if event.type == pygame.KEYUP:
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
@@ -74,6 +77,9 @@ def game_screen(window):
 
         hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False)
         if len(hits_aluno) > 0:
+        #     sprite humberto acabado
+        #     aluno.speedx = 0
+        #     tela vc perdeu
             pass
         # if len(hits_aluno) > 0:
         #     aluno.kill()
