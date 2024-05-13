@@ -36,7 +36,7 @@ def game_screen(window):
 
     #loop principal
     while state != DONE:
-        #clock.tick(FPS)
+        clock.tick(60)
         for event in pygame.event.get():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
@@ -49,20 +49,21 @@ def game_screen(window):
                         player.speedx -= 1
                     if event.key == pygame.K_RIGHT:
                         player.speedx += 1
-                    if event.key == pygame.K_SPACE:
-                        player.speedy -= 1
+                    if event.key == pygame.K_SPACE and player.toca_chao == True:
+                        player.speedy -= 15
                         #clock.tick(TEMP_VOO)
-                        # delay=1
-                        # pygame.display.flip()
-                        # pygame.event.pump()
-                        # pygame.time.delay(delay * 1000) # 1 second == 1000 milliseconds
-                        # player.speedy += 1
+                        #delay=1
+                        #pygame.display.flip()
+                        #pygame.event.pump()
+                        #pygame.time.delay(delay * 1000) # 1 second == 1000 milliseconds
+                        #player.speedy += 1
                 if event.type == pygame.KEYUP:
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
                             player.speedx += 1
                         if event.key == pygame.K_RIGHT:
                             player.speedx -= 1
+                        
 
         all_sprites.update()
 
@@ -73,9 +74,10 @@ def game_screen(window):
 
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
         if len(hits_floor) > 0:
+            player.toca_chao = True
             player.speedy = 0
         else:
-            player.speedy = 1
+            player.toca_chao = False
 
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(assets['background1'], (-200, -100))
@@ -83,7 +85,7 @@ def game_screen(window):
         
         pygame.display.update()
 
-        # if keys_down[K_SPACE] == True:
-        #     player.speedy += 1
+        #if keys_down[K_SPACE] == True:
+         #   player.speedy += 1
 
     return -1
