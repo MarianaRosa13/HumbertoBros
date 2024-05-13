@@ -3,6 +3,7 @@ from config import *
 from assets import *
 from class_Humberto import *
 from class_Floor import *
+from class_Inimigos import *
 
 def game_screen(window):
     # Variável para o ajuste de velocidade
@@ -16,11 +17,15 @@ def game_screen(window):
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets, 100, 70)
     all_sprites.add(player)
-    chao = Floor(groups, assets)
-    #aluno = Alunos(groups, assets)
-    all_sprites.add(chao)
-    all_floors.add(chao)
-    #all_alunos.add(aluno)
+    ini = 105
+    n_blocos = 10
+    for i in range(n_blocos):
+        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i == n_blocos-1)
+        all_sprites.add(chao)
+        all_floors.add(chao)
+    aluno = Inimigo(assets, random.randint(ini, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
+    all_alunos.add(aluno)
+    all_sprites.add(aluno)
     DONE = 0
     PLAYING = 1
     state = PLAYING
@@ -32,16 +37,10 @@ def game_screen(window):
 
 
 
-
-
-
-
-
     #loop principal
     while state != DONE:
         clock.tick(60)
         for event in pygame.event.get():
-            # ----- Verifica consequências
             if event.type == pygame.QUIT:
                 state = DONE
             if state == PLAYING:
@@ -54,12 +53,6 @@ def game_screen(window):
                         player.speedx += 1
                     if event.key == pygame.K_SPACE and player.toca_chao == True:
                         player.speedy -= 15
-                        #clock.tick(TEMP_VOO)
-                        #delay=1
-                        #pygame.display.flip()
-                        #pygame.event.pump()
-                        #pygame.time.delay(delay * 1000) # 1 second == 1000 milliseconds
-                        #player.speedy += 1
                 if event.type == pygame.KEYUP:
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
@@ -70,24 +63,33 @@ def game_screen(window):
 
         all_sprites.update()
 
-        
-        # if keys_down[K_SPACE] == True:
-        #     player.speedy += 1
 
-
+        player.toca_chao = False
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
-        if len(hits_floor) > 0:
+        for floor in hits_floor:
             player.toca_chao = True
             player.speedy = 0
-        else:
-            player.toca_chao = False
-        
+            player.rect.bottom = floor.rect.top
+            break        
 
-        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, True)
+        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False)
+        if len(hits_aluno) > 0:
+            pass
         # if len(hits_aluno) > 0:
         #     aluno.kill()
         #     sprite humberto acabado
         #     tela vc perdeu
+
+        hits_inimigos = pygame.sprite.groupcollide(all_alunos, all_floors, False, False)
+        for aluno in hits_inimigos:
+            floors = pygame.sprite.spritecollide(aluno, all_floors, False)
+            for floor in floors:
+                if floor.isLeft and aluno.speedx < 0 and aluno.rect.left <= floor.rect.left:
+                    aluno.rect.left = floor.rect.left + 1
+                    aluno.speedx = -aluno.speedx
+                if floor.isRight and aluno.speedx > 0 and aluno.rect.right >= floor.rect.right:
+                    aluno.rect.right = floor.rect.right - 1
+                    aluno.speedx = -aluno.speedx
 
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(assets['background1'], (-200, -100))

@@ -6,12 +6,12 @@ from config import *
 # HEIGHT = 600
 
 class Floor(pygame.sprite.Sprite):
-    def __init__(self,groups, assets):
+    def __init__(self,groups, assets, x, isLeft, isRight):
         pygame.sprite.Sprite.__init__(self)
         self.image = assets['floor']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.centerx = 105
+        self.rect.left = x
         self.rect.bottom = HEIGHT - 50
         # for i in range(20):
         #     self.rect.centerx = i
@@ -20,6 +20,8 @@ class Floor(pygame.sprite.Sprite):
         self.speedy = 0
         self.groups = groups
         self.assets = assets
+        self.isLeft = isLeft
+        self.isRight = isRight
 
 
 
