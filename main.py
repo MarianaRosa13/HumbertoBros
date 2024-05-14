@@ -34,4 +34,4 @@ while state != -1:
     pygame.display.update()  # Mostra o novo frame para o jogador
 
 
-pygame.quit()       
+pygame.quit()
