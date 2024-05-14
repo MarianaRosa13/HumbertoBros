@@ -10,7 +10,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.bottom = bottom
-        self.speedx = random.randint(0, 1)*2-1
+        self.speedx = random.randint(0, 1)*2-1 #mudar para 1!!!!!!!
         self.speedy = 0
 
     def update(self):

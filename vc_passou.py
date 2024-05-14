@@ -1,6 +1,7 @@
 import pygame
 import random
 from config import *
+from game_screen import *
 
 def passou_screen(window):
     clock = pygame.time.Clock()

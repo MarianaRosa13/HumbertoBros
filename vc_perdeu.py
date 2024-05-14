@@ -1,6 +1,7 @@
 import pygame
 import random
 from config import *
+from game_screen import *
 
 def perdeu_screen(window):
     clock = pygame.time.Clock()
@@ -23,7 +24,7 @@ def perdeu_screen(window):
                 running = False
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
-                    #state = GAME
+                #state = GAME
                 fase='1' #antes
                 running = False
 

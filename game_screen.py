@@ -4,6 +4,7 @@ from assets import *
 from class_Humberto import *
 from class_Floor import *
 from class_Inimigos import *
+from class_Atividade import *
 
 def game_screen(window):
     # Variável para o ajuste de velocidade
@@ -13,9 +14,11 @@ def game_screen(window):
     all_sprites = pygame.sprite.Group()
     all_floors = pygame.sprite.Group()
     all_alunos = pygame.sprite.Group()
+    all_atividades = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets, 100, 70)
+    ativ = Atividade(assets)
     all_sprites.add(player)
     ini = 105
     n_blocos = 10
@@ -26,13 +29,17 @@ def game_screen(window):
     aluno = Inimigo(assets, random.randint(ini, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
     all_alunos.add(aluno)
     all_sprites.add(aluno)
+    all_atividades.add(ativ)
+    all_sprites.add(ativ)
     DONE = 0
     PLAYING = 1
+    VC_PASSOU = 2
+    VC_PERDEU = 3
     state = PLAYING
     keys_down = {}
 
 
-    # score = 0
+    score = 0
     # lives = 3
 
 
@@ -78,8 +85,9 @@ def game_screen(window):
         hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False)
         if len(hits_aluno) > 0:
         #     sprite humberto acabado
-        #     aluno.speedx = 0
-        #     tela vc perdeu
+            aluno.speedx = 0
+            player.speedx = 0
+            #state = VC_PERDEU #tela vc perdeu
             pass
         # if len(hits_aluno) > 0:
         #     aluno.kill()
@@ -96,6 +104,12 @@ def game_screen(window):
                 if floor.isRight and aluno.speedx > 0 and aluno.rect.right >= floor.rect.right:
                     aluno.rect.right = floor.rect.right - 1
                     aluno.speedx = -aluno.speedx
+        
+        hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
+        if len(hits_atividade) > 0:
+        #     sprite humberto acabado
+            ativ.kill()
+            score+=1
 
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(assets['background1'], (-200, -100))
