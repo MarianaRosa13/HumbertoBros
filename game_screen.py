@@ -30,6 +30,9 @@ def game_screen(window):
     PLAYING = 1
     state = PLAYING
     keys_down = {}
+    #cria Surface mapa
+    mapa = pygame.Surface((3000, 1500))
+
 
 
     # score = 0
@@ -91,10 +94,13 @@ def game_screen(window):
                     aluno.rect.right = floor.rect.right - 1
                     aluno.speedx = -aluno.speedx
 
-        window.fill((0, 0, 0))  # Preenche com a cor branca
-        window.blit(assets['background1'], (-200, -100))
-        all_sprites.draw(window)
-        
+        mapa.fill((0, 0, 0))  # Preenche com a cor branca
+        #camera 
+        poscamera = pygame.Rect(player.rect.centerx - WIDTH/2, player.rect.centery - HEIGHT/2,WIDTH,HEIGHT)
+        mapa.blit(assets['background1'], (poscamera[0]-200,poscamera[1] -100))
+        all_sprites.draw(mapa)
+        window.fill((0,0,0))
+        pygame.Surface.blit(window, mapa, (0,0), poscamera)
         pygame.display.update()
 
         #if keys_down[K_SPACE] == True:
