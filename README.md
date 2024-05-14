@@ -10,6 +10,8 @@ O objetivo do jogo é concluir o máximo possível de tarefas sem ser pego pelos
 COMO JOGAR:
 LINK DO VIDEO AQUI
 
+Para jogar, basta executar o arquivo "main". Bom jogo!
+
 
 Criadores:
 Lucca Niklaus

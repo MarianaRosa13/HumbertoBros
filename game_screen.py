@@ -22,7 +22,7 @@ def game_screen(window):
     all_sprites.add(player)
     WIDTH = 1000
     HEIGHT = 600
-    ini =0
+    ini=0
     for i in range(WIDTH):
         chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i ==(WIDTH-1))
         all_sprites.add(chao)
@@ -34,7 +34,6 @@ def game_screen(window):
     aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
     all_alunos.add(aluno)
     all_sprites.add(aluno)
-    DONE = 0
     all_atividades.add(ativ)
     all_sprites.add(ativ)
     DONE = 0
@@ -46,12 +45,17 @@ def game_screen(window):
     #cria Surface mapa
     mapa = pygame.Surface((3000, 1500))
 
-
-
     score = 0
+    # Desenhando o score
+    text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (400, 200)    #(WIDTH / 2,  10)
+    window.blit(text_surface, text_rect)
+
+    #font1 = pygame.font.SysFont(None, 60)
+    #score_text = font1.render(score, True, (255, 0, 0))
+
     # lives = 3
-
-
 
     #loop principal
     while state != DONE:
@@ -68,20 +72,23 @@ def game_screen(window):
                         player.speedy -= 15
                     if event.key == pygame.K_LEFT:
                         print('esquerda')
-                        player.speedx -= 1
+                        player.speedx -= 1.5
                     if event.key == pygame.K_RIGHT:
                         print('direita')
-                        player.speedx += 1
+                        player.speedx += 1.5
                 if event.type == pygame.KEYUP:
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
-                            player.speedx += 1
+                            player.speedx += 1.5
                         if event.key == pygame.K_RIGHT:
-                            player.speedx -= 1
+                            player.speedx -= 1.5
                         
 
         all_sprites.update()
 
+        if player.rect.bottom > chao.rect.bottom:
+            #state = VC_PERDEU
+            pass
 
         player.toca_chao = False
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
@@ -96,8 +103,9 @@ def game_screen(window):
         #     sprite humberto acabado
             aluno.speedx = 0
             player.speedx = 0
+            player.image = assets['humberto_morrendo']
             #state = VC_PERDEU #tela vc perdeu
-            pass
+            #pass
         # if len(hits_aluno) > 0:
         #     aluno.kill()
         #     sprite humberto acabado
@@ -116,7 +124,6 @@ def game_screen(window):
         
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         if len(hits_atividade) > 0:
-        #     sprite humberto acabado
             ativ.kill()
             score+=1
 
@@ -127,9 +134,7 @@ def game_screen(window):
         all_sprites.draw(mapa)
         window.fill((0,0,0))
         pygame.Surface.blit(window, mapa, (0,0), poscamera)
+        #window.blit(score_text, (400, 150))
         pygame.display.update()
-
-        #if keys_down[K_SPACE] == True:
-         #   player.speedy += 1
 
     return -1

@@ -28,8 +28,8 @@ class Humberto(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
         
-        #Mantem o HUmberto na tela
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
+        #Mantem o Humberto na tela
+        # if self.rect.right > WIDTH:
+        #     self.rect.right = WIDTH
+        # if self.rect.left < 0:
+        #     self.rect.left = 0

@@ -3,6 +3,12 @@ import random
 from constantes import *
 from game_screen import *
 
+#pygame.init()
+
+state=0
+DONE = 0
+PLAYING = 1
+
 def perdeu_screen(window):
     clock = pygame.time.Clock()
     font1 = pygame.font.SysFont(None, 80)
@@ -20,17 +26,17 @@ def perdeu_screen(window):
         #Processa os eventos (mouse, teclado, botão, etc)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                #state = QUIT
+                state = DONE
                 running = False
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
-                #state = GAME
+                state = PLAYING
                 fase='1' #antes
                 running = False
 
         window.fill((0, 0, 0))  # Preenche com a cor preto
-        window.blit(text1, (400, 150))
-        window.blit(text2, (320, 250))
-        window.blit(text3, (320, 400))
+        window.blit(text1, (300, 170))
+        window.blit(text2, (150, 280))
+        window.blit(text3, (270, 430))
         pygame.display.update()
     return 1

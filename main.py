@@ -25,6 +25,8 @@ while state != -1:
         state = passou_screen(window)
     if state == 3:
         state = perdeu_screen(window)
+    else:
+        state = DONE
 
 
 
