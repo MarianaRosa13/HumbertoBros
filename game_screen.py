@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from constantes import *
 from assets import *
 from class_Humberto import *
 from class_Floor import *
@@ -20,15 +20,21 @@ def game_screen(window):
     player = Humberto(groups, assets, 100, 70)
     ativ = Atividade(assets)
     all_sprites.add(player)
-    ini = 105
-    n_blocos = 10
-    for i in range(n_blocos):
-        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i == n_blocos-1)
+    WIDTH = 1000
+    HEIGHT = 600
+    ini =0
+    for i in range(WIDTH):
+        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i ==(WIDTH-1))
         all_sprites.add(chao)
         all_floors.add(chao)
-    aluno = Inimigo(assets, random.randint(ini, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
+    for i in range(-HEIGHT):
+        profundidade= Floor(groups, assets, -ini - i * FLOOR_HEIGHT, i == 0, i ==(-HEIGHT+1))
+        all_sprites.add(profundidade)
+        all_floors.add(profundidade)    
+    aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
     all_alunos.add(aluno)
     all_sprites.add(aluno)
+    DONE = 0
     all_atividades.add(ativ)
     all_sprites.add(ativ)
     DONE = 0

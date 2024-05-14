@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from constantes import *
 from assets import *
 from tela_inicial import *
 from game_screen import *

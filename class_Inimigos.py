@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from constantes import *
 import random 
 class Inimigo(pygame.sprite.Sprite):
     def __init__(self, assets, x, bottom):

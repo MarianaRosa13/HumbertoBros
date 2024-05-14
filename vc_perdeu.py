@@ -1,6 +1,6 @@
 import pygame
 import random
-from config import *
+from constantes import *
 from game_screen import *
 
 def perdeu_screen(window):

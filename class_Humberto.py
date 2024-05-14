@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from constantes import *
 
 
 class Humberto(pygame.sprite.Sprite):

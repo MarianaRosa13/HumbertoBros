@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from constantes import *
 #import random
 
 # WIDTH = 1000

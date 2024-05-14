@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from constantes import *
 
 # inicia assets 
 def load_assets():
