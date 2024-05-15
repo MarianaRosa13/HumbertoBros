@@ -63,6 +63,7 @@ def game_screen(window):
 
     #loop principal
     while state in [PLAYING]:
+        assets["Trilha_sonora"].play()
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -73,6 +74,7 @@ def game_screen(window):
                     if event.key == pygame.K_SPACE:
                         print('pula')
                         player.pular()
+                        assets["pulo"].play()
                     if event.key == pygame.K_LEFT:
                         print('esquerda')
                         player.image = assets['humb_esq']
