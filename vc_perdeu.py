@@ -5,8 +5,7 @@ from game_screen import *
 
 #pygame.init()
 
-state=0
-DONE = 0
+DONE = 5
 PLAYING = 1
 
 def perdeu_screen(window):
@@ -26,11 +25,11 @@ def perdeu_screen(window):
         #Processa os eventos (mouse, teclado, botão, etc)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                state = DONE
+                #state = DONE
                 running = False
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
-                state = PLAYING
+                #state = PLAYING
                 fase='1' #antes
                 running = False
 

@@ -21,11 +21,11 @@ def init_screen(window):
         #Processa os eventos (mouse, teclado, botão, etc)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                #state = QUIT
+                #state = DONE
                 running = False
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
-                    #state = GAME
+                #state = PLAYING
                 fase='1'
                 running = False
 

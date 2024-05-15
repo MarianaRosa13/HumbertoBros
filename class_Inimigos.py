@@ -9,8 +9,9 @@ class Inimigo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.bottom = bottom
-        self.speedx = -1
+        self.speedx = 1
         self.speedy = 0
+        self.assets = assets
 
     def update(self):
         self.rect.x += self.speedx
@@ -19,3 +20,7 @@ class Inimigo(pygame.sprite.Sprite):
             self.rect.x -= self.speedx
             #self.rect.x = random.randint(-100, WIDTH-ALUNO_WIDTH)
             self.speedx = random.randint(-1, 1)
+        if self.speedx > 0:
+            self.image = self.assets['aluno_d']
+        else:
+            self.image = self.assets['aluno']
