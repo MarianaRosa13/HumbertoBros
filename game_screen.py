@@ -135,6 +135,7 @@ def game_screen(window):
 
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         if len(hits_atividade) > 0:
+            assets['coletando_exercicio'].play()
             ativ.kill()
             score+=1
 
