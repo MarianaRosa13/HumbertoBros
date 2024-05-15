@@ -66,6 +66,7 @@ def game_screen(window):
 
     #loop principal
     while state != DONE:
+        assets["Trilha_sonora"].play()
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -75,6 +76,7 @@ def game_screen(window):
                     # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
                     if event.key == pygame.K_SPACE and player.toca_chao == True:
+                        assets["pulo"].play()
                         print('pula')
                         player.speedy -= 15
                     if event.key == pygame.K_LEFT:
@@ -135,6 +137,7 @@ def game_screen(window):
         
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         if len(hits_atividade) > 0:
+            assets['coletando_exercicio'].play()
             ativ.kill()
             score+=1
 
