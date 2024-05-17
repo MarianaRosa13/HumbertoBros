@@ -22,23 +22,20 @@ def game_screen(window):
     all_sprites.add(player)
     #WIDTH = 1000
     #HEIGHT = 600
-    #ini=0
-    ini = 105
-    n_blocos = 10
-    for i in range(n_blocos):
-        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i == n_blocos-1)
-        all_sprites.add(chao)
-        all_floors.add(chao)
-    aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
-    # for i in range(WIDTH):
-    #     chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i ==(WIDTH-1))
-    #     all_sprites.add(chao)
-    #     all_floors.add(chao)
-    # for i in range(-HEIGHT):
-    #     profundidade= Floor(groups, assets, -ini - i * FLOOR_HEIGHT, i == 0, i ==(-HEIGHT+1))
-    #     all_sprites.add(profundidade)
-    #     all_floors.add(profundidade)    
-    #aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
+    ini=0
+    for i in range(WIDTH):
+         chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, 50 ,  i == 0, i ==(WIDTH-1))
+         all_sprites.add(chao)
+         all_floors.add(chao)    
+
+    # --- Add plataforma ---
+    width_plataform = 150
+    for i in range(width_plataform):
+         chao= Floor(groups, assets, WIDTH + 15 + i * FLOOR_WIDTH,  150, i == 0, i ==(WIDTH-1))
+         all_sprites.add(chao)
+         all_floors.add(chao) 
+
+    aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
     all_alunos.add(aluno)
     all_sprites.add(aluno)
     all_atividades.add(ativ)
