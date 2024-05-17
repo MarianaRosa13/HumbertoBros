@@ -5,6 +5,8 @@ from game_screen import *
 
 #pygame.init()
 
+# assets["derrotado"]=pygame.mixer.Sound("assets/sdx/derrotado.wav")
+
 DONE = 5
 PLAYING = 1
 
@@ -32,7 +34,8 @@ def perdeu_screen(window):
                 #state = PLAYING
                 fase='1' #antes
                 running = False
-
+        # assets["derrotado"].play()
+        # assets["derrotado"].set_volume(10)
         window.fill((0, 0, 0))  # Preenche com a cor preto
         window.blit(text1, (300, 170))
         window.blit(text2, (150, 280))
