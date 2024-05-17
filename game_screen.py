@@ -14,6 +14,7 @@ def game_screen(window):
     all_floors = pygame.sprite.Group()
     all_alunos = pygame.sprite.Group()
     all_atividades = pygame.sprite.Group()
+    all_cafes = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets, 100, 70)
@@ -21,6 +22,19 @@ def game_screen(window):
     all_sprites.add(player)
     ini = 105
     n_blocos = 10
+    # if fase==1:
+    #     for i in range(lista_fase1):
+    #         if lista_fase1[i]=='X':
+    #             sprite do chao no mapa
+    # elif fase==2:
+    #     for i in range(lista_fase2):
+    #         if lista_fase2[i]=='X':
+    #             sprite do chao no mapa
+    # elif fase==3:
+    #     for i in range(lista_fase3):
+    #         if lista_fase3[i]=='X':
+    #             sprite do chao no mapa
+
     for i in range(n_blocos):
         chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i == n_blocos-1)
         all_sprites.add(chao)
@@ -50,21 +64,14 @@ def game_screen(window):
     mapa = pygame.Surface((3000, 1500))
 
     score = 0
-    # Desenhando o score
-    # text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
-    # text_rect = text_surface.get_rect()
-    # text_rect.midtop = (500, 400)    #(WIDTH / 2,  10)
-    # window.blit(text_surface, text_rect)
-
-    #font1 = pygame.font.SysFont(None, 60)
-    #score_text = font1.render(score, True, (255, 0, 0))
-
-    # lives = 3
+    total_ativ = 0
 
     #loop principal
     while state in [PLAYING]:
         assets["Trilha_sonora"].play()
+        assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
+        #COLOCAR O IF FASE AQUI????????
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state = DONE
@@ -75,6 +82,7 @@ def game_screen(window):
                         print('pula')
                         player.pular()
                         assets["pulo"].play()
+                        assets["pulo"].set_volume(10)
                     if event.key == pygame.K_LEFT:
                         print('esquerda')
                         player.image = assets['humb_esq']
@@ -112,9 +120,10 @@ def game_screen(window):
             player.speedx = 0
             player.rect.bottom +=40
             player.image = assets['humberto_morrendo']
-            ######################não faz o abaixo
             pygame.time.delay(TEMP_MORRE)
             print('aquiiiiiii')
+            assets["derrotado"].play()
+            assets["derrotado"].set_volume(10)
             state = VC_PERDEU #tela vc perdeu
             
 
@@ -132,14 +141,25 @@ def game_screen(window):
         #print('score comeca aqui')
         text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
         text_rect = text_surface.get_rect()
-        text_rect.midtop = (400, 300)    #(WIDTH / 2,  10)
+        text_rect.midtop = (400, 300) #(WIDTH / 2,  10)
         window.blit(text_surface, text_rect)
 
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         if len(hits_atividade) > 0:
+            print('sooooommmmm')
             assets['coletando_exercicio'].play()
+            assets['coletando_exercicio'].set_volume(10000000000)
             ativ.kill()
             score+=1
+        
+        # hits_cafe = pygame.sprite.spritecollide(player, all_cafes, True)
+        # if len(hits_cafe) > 0:
+        #     #assets['coletando_exercicio'].play()
+        #     cafe.kill()
+        #     if score == total_ativ:
+        #         state = VC_PASSOU
+        #     else:
+        #         state = VC_PERDEU
 
         mapa.fill((0, 0, 0))  # Preenche com a cor branca
         #camera 

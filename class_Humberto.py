@@ -18,9 +18,6 @@ class Humberto(pygame.sprite.Sprite):
         self.tempo = pygame.time.get_ticks()
 
     def update(self):
-        #Atualização da posição do Humberto
-        #tempo_pass = pygame.time.get_ticks()
-        #temp_passado = tempo_pass - self.tempo
         if self.pulando:
            self.rect.y += self.speedy
            self.speedy += 1
