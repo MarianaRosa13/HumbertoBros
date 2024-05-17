@@ -5,6 +5,7 @@ from class_Humberto import *
 from class_Floor import *
 from class_Inimigos import *
 from class_Atividade import *
+from class_cafe import *
 
 def game_screen(window):
     # Variável para o ajuste de velocidade
@@ -19,7 +20,10 @@ def game_screen(window):
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets, 100, 70)
     ativ = Atividade(assets)
+    cafe = Cafe(assets)
     all_sprites.add(player)
+    all_sprites.add(cafe)
+    all_cafes.add(cafe)
     ini = 105
     n_blocos = 10
     # if fase==1:
@@ -36,7 +40,7 @@ def game_screen(window):
     #             sprite do chao no mapa
 
     for i in range(n_blocos):
-        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i == n_blocos-1)
+        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, 50, i == 0, i == n_blocos-1)
         all_sprites.add(chao)
         all_floors.add(chao)
     aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
@@ -163,14 +167,14 @@ def game_screen(window):
             ativ.kill()
             score+=1
         
-        # hits_cafe = pygame.sprite.spritecollide(player, all_cafes, True)
-        # if len(hits_cafe) > 0:
-        #     #assets['coletando_exercicio'].play()
-        #     cafe.kill()
-        #     if score == total_ativ:
-        #         state = VC_PASSOU
-        #     else:
-        #         state = VC_PERDEU
+        hits_cafe = pygame.sprite.spritecollide(player, all_cafes, True)
+        if len(hits_cafe) > 0:
+            #assets['coletando_exercicio'].play()
+            cafe.kill()
+            if score == total_ativ:
+                state = VC_PASSOU
+            else:
+                state = VC_PERDEU
 
         window.fill((0,0,0))
 

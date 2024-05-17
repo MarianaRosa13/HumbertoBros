@@ -30,6 +30,8 @@ def load_assets():
     assets['humberto_morrendo'] = pygame.transform.scale(assets['humberto_morrendo'], (HUMBERTO_HEIGHT, HUMBERTO_WIDTH))
     assets["score_font"] = pygame.font.Font('assets/img/Press_Start_2P/PressStart2P-Regular.ttf', 28)
     assets['humberto_morrendo'] = pygame.transform.scale(assets['humberto_morrendo'], (HUMBERTO_WIDTH, HUMBERTO_HEIGHT))
+    assets['cafe']=pygame.image.load('assets/img/cafe.png').convert_alpha()
+    assets['cafe'] = pygame.transform.scale(assets['cafe'], (CAFE_WIDTH, CAFE_HEIGHT))
     assets['coletando_exercicio']=pygame.mixer.Sound("assets/sdx/coletando exercicio.wav")
     assets["derrotado"]=pygame.mixer.Sound("assets/sdx/derrotado.wav")
     assets["inicialização_da_fase"]=pygame.mixer.Sound("assets/sdx/inicialização da fase.wav")
