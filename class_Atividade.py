@@ -2,7 +2,7 @@ import pygame
 from constantes import *
 import random 
 class Atividade(pygame.sprite.Sprite):
-    def __init__(self, assets):
+    def __init__(self, assets, x, y):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         self.image = assets['atividade']

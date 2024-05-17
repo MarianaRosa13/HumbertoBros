@@ -5,6 +5,7 @@ from constantes import *
 def load_assets():
     assets = {}
     assets['background1']=pygame.image.load('assets/img/Entrada-p2-Insper.jpeg').convert()
+    assets['background1'] = pygame.transform.scale(assets['background1'], (BACKGROUND_WIDTH, BACKGROUND_HEIGHT))
     assets['background2']=pygame.image.load('assets/img/sala.jpg').convert()
     assets['background3']=pygame.image.load('assets/img/refeitorio-insper31.jpg').convert()
     assets['humberto']=pygame.image.load('assets/img/SpriteHumberto.png').convert_alpha()

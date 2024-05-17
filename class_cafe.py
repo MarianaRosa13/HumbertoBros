@@ -2,7 +2,7 @@ import pygame
 from constantes import *
 import random 
 class Cafe(pygame.sprite.Sprite):
-    def __init__(self, assets):
+    def __init__(self, assets, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = assets['cafe']
         self.mask = pygame.mask.from_surface(self.image)

@@ -19,11 +19,9 @@ def game_screen(window):
     groups = {}
     groups['all_sprites'] = all_sprites
     player = Humberto(groups, assets, 100, 70)
-    ativ = Atividade(assets)
-    cafe = Cafe(assets)
+    # ativ = Atividade(assets, x, y)
+    # cafe = Cafe(assets)
     all_sprites.add(player)
-    all_sprites.add(cafe)
-    all_cafes.add(cafe)
     ini = 105
     n_blocos = 10
     # if fase==1:
@@ -39,11 +37,7 @@ def game_screen(window):
     #         if lista_fase3[i]=='X':
     #             sprite do chao no mapa
 
-    for i in range(n_blocos):
-        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, 50, i == 0, i == n_blocos-1)
-        all_sprites.add(chao)
-        all_floors.add(chao)
-    cenario = [
+    cenario_1fase = [
         '                    ',
         '                    ',
         '                    ',
@@ -51,25 +45,33 @@ def game_screen(window):
         '                    ',
         '                    ',
         '                    ',
+        '        a           ',
+        '       xxxx         ',
+        '               c    ',
+        ' xxxxxx      xxxx   ',
         '                    ',
         '                    ',
         '                    ',
-        ' xxxxxx             ',
-        '                    ',
-        '           xxxxx    ',
         '                    ',
         '                    ',
-        ' xxxxxxxx    xxxxxxx',
     ]
 
-    for l in range(len(cenario)):
-        for c in range(len(cenario[l])):
-            if cenario[l][c] == 'x':
-                isLeft = c == 0 or cenario[l][c-1] != 'x'
-                isRight = c == len(cenario[l])-1 or cenario[l][c+1] != 'x'
+    for l in range(len(cenario_1fase)):
+        for c in range(len(cenario_1fase[l])):
+            if cenario_1fase[l][c] == 'x':
+                isLeft = c == 0 or cenario_1fase[l][c-1] != 'x'
+                isRight = c == len(cenario_1fase[l])-1 or cenario_1fase[l][c+1] != 'x'
                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
                 all_sprites.add(chao)
                 all_floors.add(chao)
+            if cenario_1fase[l][c] == 'a':
+                ativ = Atividade(assets, (c)* ATIV_WIDTH, (l+1)* ATIV_WIDTH)
+                all_sprites.add(ativ)
+                all_atividades.add(ativ)
+            if cenario_1fase[l][c] == 'c':
+                cafe = Cafe(assets, (c)* CAFE_WIDTH, (l+1)* CAFE_WIDTH)
+                all_sprites.add(cafe)
+                all_cafes.add(cafe)
                 
     aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
     # for i in range(WIDTH):
@@ -84,17 +86,17 @@ def game_screen(window):
     #WIDTH = 1000
     #HEIGHT = 600
     ini=0
-    for i in range(WIDTH):
-         chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, 50 ,  i == 0, i ==(WIDTH-1))
-         all_sprites.add(chao)
-         all_floors.add(chao)    
+    # for i in range(WIDTH):
+    #      chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, 50 ,  i == 0, i ==(WIDTH-1))
+    #      all_sprites.add(chao)
+    #      all_floors.add(chao)    
 
     # --- Add plataforma ---
     width_plataform = 150
-    for i in range(width_plataform):
-         chao= Floor(groups, assets, WIDTH + 15 + i * FLOOR_WIDTH,  150, i == 0, i ==(WIDTH-1))
-         all_sprites.add(chao)
-         all_floors.add(chao) 
+    # for i in range(width_plataform):
+    #      chao= Floor(groups, assets, WIDTH + 15 + i * FLOOR_WIDTH,  150, i == 0, i ==(WIDTH-1))
+    #      all_sprites.add(chao)
+    #      all_floors.add(chao) 
 
     aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
     all_alunos.add(aluno)
@@ -155,7 +157,7 @@ def game_screen(window):
             pygame.time.delay(TEMP_CAIR)
             state = VC_PERDEU
 
-        player.toca_chao = False
+        #player.toca_chao = False
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
         for floor in hits_floor:
             player.tocou_chao()
@@ -204,17 +206,19 @@ def game_screen(window):
             else:
                 state = VC_PERDEU
 
-        window.fill((0,0,0))
+        pygame.display.update()
+
+        window.fill((255,255,255))
 
 
 
-        mapa.fill((0, 0, 0))  # Preenche com a cor branca
-        #camera 
-        poscamera = pygame.Rect(player.rect.centerx - WIDTH/2, player.rect.centery - HEIGHT/2,WIDTH,HEIGHT)
-        mapa.blit(assets['background1'], (poscamera[0]-200,poscamera[1] -100))
-        all_sprites.draw(mapa)
+        # mapa.fill((0, 0, 0))  # Preenche com a cor branca
+        # #camera 
+        # poscamera = pygame.Rect(player.rect.centerx - WIDTH/2, player.rect.centery - HEIGHT/2,WIDTH,HEIGHT)
+        # mapa.blit(assets['background1'], (poscamera[0]-100,poscamera[1] -100))
+        all_sprites.draw(window)
 
-        pygame.Surface.blit(window, mapa, (0,0), poscamera)
+        # pygame.Surface.blit(window, mapa, (0,0), poscamera)
 
         #print('score comeca aqui')
         text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
@@ -222,9 +226,8 @@ def game_screen(window):
         text_rect.topleft = (10, 10) #(WIDTH / 2,  10)
         window.blit(text_surface, text_rect)
 
-        #window.blit(score_text, (400, 150))
+#        window.blit(score_text, (400, 150))
 
         #mapa.blit(text_surface, text_rect)
-        pygame.display.update()
 
     return state
