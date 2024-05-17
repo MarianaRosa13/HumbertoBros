@@ -35,10 +35,34 @@ def game_screen(window):
     #         if lista_fase3[i]=='X':
     #             sprite do chao no mapa
 
-    for i in range(n_blocos):
-        chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i == n_blocos-1)
-        all_sprites.add(chao)
-        all_floors.add(chao)
+    cenario = [
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        '                    ',
+        ' xxxxxx             ',
+        '                    ',
+        '           xxxxx    ',
+        '                    ',
+        '                    ',
+        ' xxxxxxxx    xxxxxxx',
+    ]
+
+    for l in range(len(cenario)):
+        for c in range(len(cenario[l])):
+            if cenario[l][c] == 'x':
+                isLeft = c == 0 or cenario[l][c-1] != 'x'
+                isRight = c == len(cenario[l])-1 or cenario[l][c+1] != 'x'
+                chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
+                all_sprites.add(chao)
+                all_floors.add(chao)
+                
     aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
     # for i in range(WIDTH):
     #     chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i ==(WIDTH-1))

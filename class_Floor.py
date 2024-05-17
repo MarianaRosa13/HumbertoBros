@@ -6,13 +6,13 @@ from constantes import *
 # HEIGHT = 600
 
 class Floor(pygame.sprite.Sprite):
-    def __init__(self,groups, assets, x, delta_height, isLeft, isRight):
+    def __init__(self,groups, assets, x, y, isLeft, isRight):
         pygame.sprite.Sprite.__init__(self)
         self.image = assets['floor']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.left = x
-        self.rect.bottom = HEIGHT - delta_height
+        self.rect.bottom = y
         
         self.speedx = 0
         self.speedy = 0
