@@ -28,7 +28,7 @@ def load_assets():
     assets['humberto_exausto'] = pygame.transform.scale(assets['humberto_exausto'], (HUMBERTO_WIDTH, HUMBERTO_HEIGHT))
     assets['humberto_morrendo']=pygame.image.load('assets/img/Humberto_morrendo.png').convert_alpha()
     assets['humberto_morrendo'] = pygame.transform.scale(assets['humberto_morrendo'], (HUMBERTO_HEIGHT, HUMBERTO_WIDTH))
-    assets["score_font"] = pygame.font.Font('assets/img/Press_Start_2P/PressStart2P-Regular.ttf', 50) #28)
+    assets["score_font"] = pygame.font.Font('assets/img/Press_Start_2P/PressStart2P-Regular.ttf', 28)
     assets['humberto_morrendo'] = pygame.transform.scale(assets['humberto_morrendo'], (HUMBERTO_WIDTH, HUMBERTO_HEIGHT))
     assets['coletando_exercicio']=pygame.mixer.Sound("assets/sdx/coletando exercicio.wav")
     assets["derrotado"]=pygame.mixer.Sound("assets/sdx/derrotado.wav")

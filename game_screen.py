@@ -138,11 +138,6 @@ def game_screen(window):
                     aluno.rect.right = floor.rect.right - 1
                     aluno.speedx = -aluno.speedx
         
-        #print('score comeca aqui')
-        text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (400, 300) #(WIDTH / 2,  10)
-        window.blit(text_surface, text_rect)
 
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         if len(hits_atividade) > 0:
@@ -161,13 +156,24 @@ def game_screen(window):
         #     else:
         #         state = VC_PERDEU
 
+        window.fill((0,0,0))
+
+
+
         mapa.fill((0, 0, 0))  # Preenche com a cor branca
         #camera 
         poscamera = pygame.Rect(player.rect.centerx - WIDTH/2, player.rect.centery - HEIGHT/2,WIDTH,HEIGHT)
         mapa.blit(assets['background1'], (poscamera[0]-200,poscamera[1] -100))
         all_sprites.draw(mapa)
-        window.fill((0,0,0))
+
         pygame.Surface.blit(window, mapa, (0,0), poscamera)
+
+        #print('score comeca aqui')
+        text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.topleft = (10, 10) #(WIDTH / 2,  10)
+        window.blit(text_surface, text_rect)
+
         #window.blit(score_text, (400, 150))
 
         #mapa.blit(text_surface, text_rect)
