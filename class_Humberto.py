@@ -11,25 +11,26 @@ class Humberto(pygame.sprite.Sprite):
         self.rect.centerx = x
         self.rect.bottom = y
         self.speedx = 0
-        self.speedy = 0
+        self.speedy = 20
         self.groups = groups
         self.assets = assets 
-        self.toca_chao = False
+        self.pulando = True
         self.tempo = pygame.time.get_ticks()
+
     def update(self):
-        #Atualização da posição do Humberto
-        tempo_pass = pygame.time.get_ticks()
-        temp_passado = tempo_pass - self.tempo
-        if (temp_passado >TEMP_VOO) and self.toca_chao == False:
-            self.speedy +=0.5
+        if self.pulando:
+           self.rect.y += self.speedy
+           self.speedy += 1
+        self.rect.x += self.speedx
 
+    def pular(self):
+        print('pulou')
+        if not self.pulando:
+            self.pulando = True
+            self.speedy -= 20
 
-
+    def tocou_chao(self):
+        self.pulando = False
+        self.speedy = 0
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        
-        #Mantem o Humberto na tela
-        # if self.rect.right > WIDTH:
-        #     self.rect.right = WIDTH
-        # if self.rect.left < 0:
-        #     self.rect.left = 0

@@ -16,7 +16,8 @@ pygame.display.set_caption('Humberto Bros')
 
 
 state = 0
-while state != -1:
+while state != DONE:
+    print(state)
     if state == 0:
         state = init_screen(window)
     if state == 1:
@@ -25,8 +26,6 @@ while state != -1:
         state = passou_screen(window)
     if state == 3:
         state = perdeu_screen(window)
-    else:
-        state = DONE
 
 
 
