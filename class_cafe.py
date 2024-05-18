@@ -7,8 +7,8 @@ class Cafe(pygame.sprite.Sprite):
         self.image = assets['cafe']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = 450
-        self.rect.bottom = 400 #depende da altura do chao, mas o chao tbm é random
+        self.rect.x = x
+        self.rect.bottom = y #depende da altura do chao, mas o chao tbm é random
         self.speedx = 0
         self.speedy = 0
 

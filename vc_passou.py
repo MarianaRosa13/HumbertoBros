@@ -29,8 +29,8 @@ def passou_screen(window):
                 running = False
 
         window.fill((0, 0, 255))  # Preenche com a cor azul
-        window.blit(text1, (70, 160))
-        window.blit(text2, (280, 270))
-        window.blit(text3, (270, 430))
+        window.blit(text1, (150, 160))
+        window.blit(text2, (360, 270))
+        window.blit(text3, (350, 430))
         pygame.display.update()
     return 1

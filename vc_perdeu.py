@@ -37,8 +37,8 @@ def perdeu_screen(window):
         # assets["derrotado"].play()
         # assets["derrotado"].set_volume(10)
         window.fill((0, 0, 0))  # Preenche com a cor preto
-        window.blit(text1, (300, 170))
-        window.blit(text2, (150, 280))
-        window.blit(text3, (270, 430))
+        window.blit(text1, (380, 170))
+        window.blit(text2, (230, 280))
+        window.blit(text3, (350, 430))
         pygame.display.update()
     return 1

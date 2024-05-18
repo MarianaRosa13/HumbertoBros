@@ -31,8 +31,8 @@ def init_screen(window):
 
         window.fill((255, 255, 255))  # Preenche com a cor branco
         window.blit(backgroud_init, (0, -50))
-        window.blit(text1, (400, 150))
-        window.blit(text2, (320, 250))
-        window.blit(text3, (320, 400))
+        window.blit(text1, (480, 150))
+        window.blit(text2, (400, 250))
+        window.blit(text3, (400, 400))
         pygame.display.update()
     return 1
