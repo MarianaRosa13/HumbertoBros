@@ -13,20 +13,14 @@ def init_screen(window):
     text3 = font3.render('Pressione enter para começar', True, (255, 0, 0))
     inicial = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
     backgroud_init = pygame.transform.scale(inicial, (BACK_INI_WIDTH, BACK_INI_HEIGHT))
-    #Processa os eventos (mouse, teclado, botão, etc)
     running = True
     while running==True:
-        #Ajusta a velocidade do jogo.
-        #clock.tick(FPS)
-        #Processa os eventos (mouse, teclado, botão, etc)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 #state = DONE
                 running = False
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
-                #state = PLAYING
-                fase='1'
                 running = False
 
         window.fill((255, 255, 255))  # Preenche com a cor branco

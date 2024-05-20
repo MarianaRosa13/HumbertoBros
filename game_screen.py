@@ -21,7 +21,7 @@ def game_screen(window, fase):
     groups = {}
     groups['all_sprites'] = all_sprites
     #cria player
-    player = Humberto(groups, assets, 100, 70)
+    player = Humberto(groups, assets, 100, 100)
     all_sprites.add(player)
     #define variaveis que serão usadas
     score = 0
@@ -52,17 +52,14 @@ def game_screen(window, fase):
                 all_sprites.add(aluno)  #coloca o inimigo nos sprites
                 all_alunos.add(aluno)
 
-    #PRECISA DESCOMENTAR ESSE AQUI!!!!!!!!!!!        
-    # aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
-
-    ini=0
+    #ini=0
 
     #cria as variáveis de estados do jogo
     DONE = 5
-    #INI = 0
     PLAYING = 1
     VC_PASSOU = 9
     VC_PERDEU = 3
+    VC_GANHOU = 2
     state = PLAYING
     keys_down = {}
     #cria Surface mapa
@@ -108,7 +105,7 @@ def game_screen(window, fase):
 
         all_sprites.update()
 
-        if player.rect.bottom > HEIGHT +40:  #chao.rect.bottom:
+        if player.rect.bottom > HEIGHT +40:
             pygame.time.delay(TEMP_CAIR)
             state = VC_PERDEU
 
@@ -117,6 +114,8 @@ def game_screen(window, fase):
             player.tocou_chao()
             player.rect.bottom = floor.rect.top
             break
+        print('chao:')
+        print(len(hits_floor))
         if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
             player.pulando = False
             player.speedy = 10
@@ -155,11 +154,18 @@ def game_screen(window, fase):
         hits_cafe = pygame.sprite.spritecollide(player, all_cafes, True)
         if len(hits_cafe) > 0:
             #assets['coletando_exercicio'].play()
-            cafe.kill()
-            if score == total_ativ:
-                state = VC_PASSOU
+            if fase==3:
+                cafe.kill()
+                if score == total_ativ:
+                    state = VC_GANHOU
+                else:
+                    state = VC_PERDEU
             else:
-                state = VC_PERDEU
+                cafe.kill()
+                if score == total_ativ:
+                    state = VC_PASSOU
+                else:
+                    state = VC_PERDEU
 
         pygame.display.update()
 
