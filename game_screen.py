@@ -117,9 +117,9 @@ def game_screen(window, fase):
             player.tocou_chao()
             player.rect.bottom = floor.rect.top
             break
-        # if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
-        #     player.pulando = True
-        #     player.speedy = 10
+        if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
+            player.pulando = False
+            player.speedy = 10
 
         hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False, pygame.sprite.collide_mask)
         if len(hits_aluno) > 0:
