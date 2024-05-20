@@ -22,6 +22,10 @@ class Humberto(pygame.sprite.Sprite):
            self.rect.y += self.speedy
            self.speedy += 1
         self.rect.x += self.speedx
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
 
     def pular(self):
         print('pulou')
