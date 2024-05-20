@@ -185,7 +185,7 @@ def game_screen(window):
     #loop principal
     while state in [PLAYING]:
         assets["Trilha_sonora"].play()
-        assets['Trilha_sonora'].set_volume(0.5)
+        #assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
 
 
