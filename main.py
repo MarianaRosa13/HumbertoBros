@@ -16,14 +16,17 @@ pygame.display.set_caption('Humberto Bros')
 
 
 state = 0
+fase = 1
 while state != DONE:
     print(state)
     if state == 0:
         state = init_screen(window)
     if state == 1:
-        state = game_screen(window)
-    if state == 2:
-        state = passou_screen(window)
+        state = game_screen(window, fase)
+        if state == 9:
+            state = passou_screen(window)
+            fase += 1
+            state = 1
     if state == 3:
         state = perdeu_screen(window)
 

@@ -8,10 +8,11 @@ from class_Atividade import *
 from class_cafe import *
 from cenarios import *
 
-def game_screen(window):
+def game_screen(window, fase):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
     assets = load_assets()
+    #cria grupos
     all_sprites = pygame.sprite.Group()
     all_floors = pygame.sprite.Group()
     all_alunos = pygame.sprite.Group()
@@ -19,267 +20,81 @@ def game_screen(window):
     all_cafes = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
+    #cria player
     player = Humberto(groups, assets, 100, 70)
-    # ativ = Atividade(assets, x, y)
-    # cafe = Cafe(assets)
     all_sprites.add(player)
-    ini = 105
-    n_blocos = 10
+    #define variaveis que serão usadas
     score = 0
     total_ativ = 0
 
-    # fase=1
-    # if fase==1:
-    #     for l in range(len(cenario_1fase)):
-    #         for c in range(len(cenario_1fase[l])):
-    #             if cenario_1fase[l][c] == 'x':
-    #                 isLeft = c == 0 or cenario_1fase[l][c-1] != 'x'
-    #                 isRight = c == len(cenario_1fase[l])-1 or cenario_1fase[l][c+1] != 'x'
-    #                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-    #                 all_sprites.add(chao)
-    #                 all_floors.add(chao)
-    #             if cenario_1fase[l][c] == 'a':
-    #                 ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-    #                 all_sprites.add(ativ)
-    #                 all_atividades.add(ativ)
-    #                 total_ativ+=1
-    #             if cenario_1fase[l][c] == 'c':
-    #                 cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-    #                 all_sprites.add(cafe)
-    #                 all_cafes.add(cafe)
-    #             if cenario_1fase[l][c] == 'I':
-    #                 aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-    #                 all_sprites.add(aluno)
-    #                 all_cafes.add(aluno)
-    # elif fase==2:
-    #     for l in range(len(cenario_2fase)):
-    #         for c in range(len(cenario_2fase[l])):
-    #             if cenario_2fase[l][c] == 'x':
-    #                 isLeft = c == 0 or cenario_2fase[l][c-1] != 'x'
-    #                 isRight = c == len(cenario_2fase[l])-1 or cenario_2fase[l][c+1] != 'x'
-    #                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-    #                 all_sprites.add(chao)
-    #                 all_floors.add(chao)
-    #             if cenario_2fase[l][c] == 'a':
-    #                 ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-    #                 all_sprites.add(ativ)
-    #                 all_atividades.add(ativ)
-    #                 total_ativ+=1
-    #             if cenario_2fase[l][c] == 'c':
-    #                 cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-    #                 all_sprites.add(cafe)
-    #                 all_cafes.add(cafe)
-    #             if cenario_2fase[l][c] == 'I':
-    #                 aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-    #                 all_sprites.add(aluno)
-    #                 all_cafes.add(aluno)
-    # elif fase==3:
-    #     for l in range(len(cenario_3fase)):
-    #         for c in range(len(cenario_3fase[l])):
-    #             if cenario_3fase[l][c] == 'x':
-    #                 isLeft = c == 0 or cenario_3fase[l][c-1] != 'x'
-    #                 isRight = c == len(cenario_3fase[l])-1 or cenario_3fase[l][c+1] != 'x'
-    #                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-    #                 all_sprites.add(chao)
-    #                 all_floors.add(chao)
-    #             if cenario_3fase[l][c] == 'a':
-    #                 ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-    #                 all_sprites.add(ativ)
-    #                 all_atividades.add(ativ)
-    #                 total_ativ+=1
-    #             if cenario_3fase[l][c] == 'c':
-    #                 cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-    #                 all_sprites.add(cafe)
-    #                 all_cafes.add(cafe)
-    #             if cenario_3fase[l][c] == 'I':
-    #                 aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-    #                 all_sprites.add(aluno)
-    #                 all_cafes.add(aluno)
+    cenario = cenarios[fase]
 
-
-    cenario_1fase = [
-        '                             ',
-        '                             ',
-        '                             ',
-        '                             ',
-        '                             ',
-        '                             ',
-        '                             ',
-        '                           cx',
-        '                         x   ',
-        '     xxxa      x   a xxxa    ',
-        'xxxx      xxxa  Ixxx         ',
-        '                             ',
-        '                             ',
-        '                             ',
-        '                             ',
-        '                             ',
-    ]
-
-    for l in range(len(cenario_1fase)):
-        for c in range(len(cenario_1fase[l])):
-            if cenario_1fase[l][c] == 'x':
-                isLeft = c == 0 or cenario_1fase[l][c-1] != 'x'
-                isRight = c == len(cenario_1fase[l])-1 or cenario_1fase[l][c+1] != 'x'
-                chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-                all_sprites.add(chao)
+    for l in range(len(cenario)):  #varre o cenário
+        for c in range(len(cenario[l])):
+            if cenario[l][c] == 'x':  #verifica se a posição tem chão
+                isLeft = c == 0 or cenario[l][c-1] != 'x'  #verifica se o chão é o da esquerda
+                isRight = c == len(cenario[l])-1 or cenario[l][c+1] != 'x'  #verifica se o chão é o da direita
+                chao = Floor(groups, assets, (c)* BLOCK_WIDTH, (l+1)* BLOCK_HEIGHT, isLeft, isRight)
+                all_sprites.add(chao)  #coloca o chão nos sprites
                 all_floors.add(chao)
-            if cenario_1fase[l][c] == 'a':
-                ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-                all_sprites.add(ativ)
+            if cenario[l][c] == 'a':  #verifica se a posição tem atividade
+                ativ = Atividade(assets, (c) * BLOCK_WIDTH, (l+1)* BLOCK_HEIGHT)
+                all_sprites.add(ativ)  #coloca a atividade nos sprites
                 all_atividades.add(ativ)
-                total_ativ+=1
-            if cenario_1fase[l][c] == 'c':
-                cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-                all_sprites.add(cafe)
+                total_ativ+=1  #aumenta o total de atividades na tela
+                print(total_ativ)
+            if cenario[l][c] == 'c':  #verifica se a posição tem café
+                cafe = Cafe(assets, (c) * BLOCK_WIDTH, (l+1)* BLOCK_HEIGHT)
+                all_sprites.add(cafe)  #coloca o café nos sprites
                 all_cafes.add(cafe)
-            if cenario_1fase[l][c] == 'I':
-                aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-                all_sprites.add(cafe)
-                all_cafes.add(cafe)
+            if cenario[l][c] == 'I':  #verifica se a posição tem inimigo
+                aluno = Inimigo(assets, (c) * BLOCK_WIDTH, (l+1)* BLOCK_HEIGHT + 1)
+                all_sprites.add(aluno)  #coloca o inimigo nos sprites
+                all_alunos.add(aluno)
 
     #PRECISA DESCOMENTAR ESSE AQUI!!!!!!!!!!!        
-    #aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
+    # aluno = Inimigo(assets, random.randint(ini+5, (n_blocos-1)*FLOOR_WIDTH+ini), chao.rect.top + 1)
 
-
-    # for i in range(WIDTH):
-    #     chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, i == 0, i ==(WIDTH-1))
-    #     all_sprites.add(chao)
-    #     all_floors.add(chao)
-    # for i in range(-HEIGHT):
-    #     profundidade= Floor(groups, assets, -ini - i * FLOOR_HEIGHT, i == 0, i ==(-HEIGHT+1))
-    #     all_sprites.add(profundidade)
-    #     all_floors.add(profundidade)    
-    #aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
-    #WIDTH = 1000
-    #HEIGHT = 600
     ini=0
-    # for i in range(WIDTH):
-    #      chao = Floor(groups, assets, ini + i * FLOOR_WIDTH, 50 ,  i == 0, i ==(WIDTH-1))
-    #      all_sprites.add(chao)
-    #      all_floors.add(chao)    
 
-    # --- Add plataforma ---
-    width_plataform = 150
-    # for i in range(width_plataform):
-    #      chao= Floor(groups, assets, WIDTH + 15 + i * FLOOR_WIDTH,  150, i == 0, i ==(WIDTH-1))
-    #      all_sprites.add(chao)
-    #      all_floors.add(chao) 
-
-    #aluno = Inimigo(assets, random.randint(ini, (HEIGHT-1)*FLOOR_HEIGHT+ini), chao.rect.top + 1)
-    all_alunos.add(aluno)
-    all_sprites.add(aluno)
-    all_atividades.add(ativ)
-    all_sprites.add(ativ)
+    #cria as variáveis de estados do jogo
     DONE = 5
-    INI = 0
+    #INI = 0
     PLAYING = 1
-    VC_PASSOU = 2
+    VC_PASSOU = 9
     VC_PERDEU = 3
     state = PLAYING
     keys_down = {}
     #cria Surface mapa
-    mapa = pygame.Surface((3000, 1500))
+    #mapa = pygame.Surface((3000, 1500))
 
     
     #loop principal
     while state in [PLAYING]:
-        assets["Trilha_sonora"].play()
+        assets["Trilha_sonora"].play() #toca a trilha sonora enquanto estiver jogando
         assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
 
 
 
-
-        #COLOCAR O IF FASE AQUI????????
-        # if fase==1:
-        #     for l in range(len(cenario_1fase)):
-        #         for c in range(len(cenario_1fase[l])):
-        #             if cenario_1fase[l][c] == 'x':
-        #                 isLeft = c == 0 or cenario_1fase[l][c-1] != 'x'
-        #                 isRight = c == len(cenario_1fase[l])-1 or cenario_1fase[l][c+1] != 'x'
-        #                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-        #                 all_sprites.add(chao)
-        #                 all_floors.add(chao)
-        #             if cenario_1fase[l][c] == 'a':
-        #                 ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-        #                 all_sprites.add(ativ)
-        #                 all_atividades.add(ativ)
-        #                 total_ativ+=1
-        #             if cenario_1fase[l][c] == 'c':
-        #                 cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-        #                 all_sprites.add(cafe)
-        #                 all_cafes.add(cafe)
-        #             if cenario_1fase[l][c] == 'I':
-        #                 aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-        #                 all_sprites.add(cafe)
-        #                 all_cafes.add(cafe)
-        # elif fase==2:
-        #     for l in range(len(cenario_2fase)):
-        #         for c in range(len(cenario_2fase[l])):
-        #             if cenario_2fase[l][c] == 'x':
-        #                 isLeft = c == 0 or cenario_2fase[l][c-1] != 'x'
-        #                 isRight = c == len(cenario_2fase[l])-1 or cenario_2fase[l][c+1] != 'x'
-        #                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-        #                 all_sprites.add(chao)
-        #                 all_floors.add(chao)
-        #             if cenario_2fase[l][c] == 'a':
-        #                 ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-        #                 all_sprites.add(ativ)
-        #                 all_atividades.add(ativ)
-        #                 total_ativ+=1
-        #             if cenario_2fase[l][c] == 'c':
-        #                 cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-        #                 all_sprites.add(cafe)
-        #                 all_cafes.add(cafe)
-        #             if cenario_2fase[l][c] == 'I':
-        #                 aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-        #                 all_sprites.add(cafe)
-        #                 all_cafes.add(cafe)
-        # elif fase==3:
-        #     for l in range(len(cenario_3fase)):
-        #         for c in range(len(cenario_3fase[l])):
-        #             if cenario_3fase[l][c] == 'x':
-        #                 isLeft = c == 0 or cenario_3fase[l][c-1] != 'x'
-        #                 isRight = c == len(cenario_3fase[l])-1 or cenario_3fase[l][c+1] != 'x'
-        #                 chao = Floor(groups, assets, (c)* FLOOR_WIDTH, (l+1)* FLOOR_WIDTH, isLeft, isRight)
-        #                 all_sprites.add(chao)
-        #                 all_floors.add(chao)
-        #             if cenario_3fase[l][c] == 'a':
-        #                 ativ = Atividade(assets, (c) * ATIV_WIDTH, (l+1)* ATIV_WIDTH)
-        #                 all_sprites.add(ativ)
-        #                 all_atividades.add(ativ)
-        #                 total_ativ+=1
-        #             if cenario_3fase[l][c] == 'c':
-        #                 cafe = Cafe(assets, (c) * CAFE_WIDTH, (l+1)* CAFE_WIDTH)
-        #                 all_sprites.add(cafe)
-        #                 all_cafes.add(cafe)
-        #             if cenario_3fase[l][c] == 'I':
-        #                 aluno = Inimigo(assets, (c) * ALUNO_WIDTH, chao.rect.top + 1)
-        #                 all_sprites.add(cafe)
-        #                 all_cafes.add(cafe)
-
-
-
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        for event in pygame.event.get():  #varre os eventos do jogo
+            if event.type == pygame.QUIT:  #verifica se apertou o botão de sair
                 state = DONE
             if state == PLAYING:
                 if event.type == pygame.KEYDOWN:
                     keys_down[event.key] = True
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE:  #verifica se pressionou espaço
                         print('pula')
-                        player.pular()
-                        assets["pulo"].play()
+                        player.pular()  #função que faz o player pular
+                        assets["pulo"].play()  #executa o som de pulo
                         assets["pulo"].set_volume(10)
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_LEFT:  #verifica se pressionou seta para a esquerda
                         print('esquerda')
-                        player.image = assets['humb_esq']
+                        player.image = assets['humb_esq']  #sprite do humberto virado para a esquerda
                         player.speedx -= 2
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_RIGHT:  #verifica se pressionou seta para a direita
                         print('direita')
-                        player.image = assets['humb_dir']
+                        player.image = assets['humb_dir']   #sprite do humberto virado para a direita
                         player.speedx += 2
                 if event.type == pygame.KEYUP:
                     if event.key in keys_down and keys_down[event.key]:
@@ -297,21 +112,22 @@ def game_screen(window):
             pygame.time.delay(TEMP_CAIR)
             state = VC_PERDEU
 
-        #player.toca_chao = False
-        hits_floor = pygame.sprite.spritecollide(player, all_floors, False)
+        hits_floor = pygame.sprite.spritecollide(player, all_floors, False, pygame.sprite.collide_mask)
         for floor in hits_floor:
             player.tocou_chao()
             player.rect.bottom = floor.rect.top
             break
+        # if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
+        #     player.pulando = True
+        #     player.speedy = 10
 
-        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False)
+        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False, pygame.sprite.collide_mask)
         if len(hits_aluno) > 0:
             aluno.speedx = 0
             player.speedx = 0
             player.rect.bottom +=40
             player.image = assets['humberto_morrendo']
             pygame.time.delay(TEMP_MORRE)
-            print('aquiiiiiii')
             assets["derrotado"].play()
             assets["derrotado"].set_volume(10)
             state = VC_PERDEU #tela vc perdeu
@@ -330,8 +146,7 @@ def game_screen(window):
         
 
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
-        if len(hits_atividade) > 0:
-            print('sooooommmmm')
+        for ativ in hits_atividade:
             assets['coletando_exercicio'].play()
             assets['coletando_exercicio'].set_volume(10000000000)
             ativ.kill()
@@ -342,7 +157,6 @@ def game_screen(window):
             #assets['coletando_exercicio'].play()
             cafe.kill()
             if score == total_ativ:
-                fase+=1
                 state = VC_PASSOU
             else:
                 state = VC_PERDEU
@@ -350,12 +164,12 @@ def game_screen(window):
         pygame.display.update()
 
         window.fill((255,255,255))
-        #if fase == 1:
-        window.blit(assets['background1'], (0, 0))
-        # elif fase == 2:
-        #     window.blit(assets['background2'], (0, 0))
-        # elif fase == 3:
-        #     window.blit(assets['background3'], (0, 0))
+        if fase == 1:
+            window.blit(assets['background1'], (0, 0))
+        elif fase == 2:
+            window.blit(assets['background2'], (0, 0))
+        elif fase == 3:
+            window.blit(assets['background3'], (0, 0))
 
 
 
@@ -372,8 +186,6 @@ def game_screen(window):
         text_rect = text_surface.get_rect()
         text_rect.topleft = (10, 10) #(WIDTH / 2,  10)
         window.blit(text_surface, text_rect)
-
-#        window.blit(score_text, (400, 150))
 
         #mapa.blit(text_surface, text_rect)
 
