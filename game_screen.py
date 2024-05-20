@@ -72,7 +72,7 @@ def game_screen(window, fase):
     #loop principal
     while state in [PLAYING]:
         assets["Trilha_sonora"].play() #toca a trilha sonora enquanto estiver jogando
-        assets['Trilha_sonora'].set_volume(0.5)
+        #assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
 
 
