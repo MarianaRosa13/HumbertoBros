@@ -14,6 +14,7 @@ def init_screen(window):
     inicial = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
     backgroud_init = pygame.transform.scale(inicial, (BACK_INI_WIDTH, BACK_INI_HEIGHT))
     running = True
+    keys_down = {}
     while running==True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -22,6 +23,19 @@ def init_screen(window):
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
                 running = False
+                #keys_down[event.key] = True
+                if event.key == pygame.K_RETURN:
+                    fase = '1'
+                    running = False
+                    return 1
+                elif event.key == pygame.K_RIGHT:
+                    print('direita')
+                    fase='6'
+                    running = False
+                    return 6
+               
+
+                    
 
         window.fill((255, 255, 255))  # Preenche com a cor branco
         window.blit(backgroud_init, (0, -50))
@@ -29,4 +43,4 @@ def init_screen(window):
         window.blit(text2, (400, 250))
         window.blit(text3, (400, 400))
         pygame.display.update()
-    return 1
+    return 0

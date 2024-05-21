@@ -60,6 +60,7 @@ def game_screen(window, fase):
     VC_PASSOU = 9
     VC_PERDEU = 3
     VC_GANHOU = 2
+    INSTRUCOES = 6
     state = PLAYING
     keys_down = {}
     #cria Surface mapa
