@@ -4,7 +4,6 @@ from constantes import *
 from game_screen import *
 
 def ganhou_screen(window):
-    clock = pygame.time.Clock()
     font1 = pygame.font.SysFont(None, 75)
     font2 = pygame.font.SysFont(None, 65)
     font3 = pygame.font.SysFont(None, 45)

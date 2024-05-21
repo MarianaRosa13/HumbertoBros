@@ -9,7 +9,7 @@ from class_cafe import *
 from cenarios import *
 
 def game_screen(window, fase):
-    # Variável para o ajuste de velocidade
+    #Ajuste de velocidade
     clock = pygame.time.Clock()
     assets = load_assets()
     #cria grupos
@@ -23,7 +23,7 @@ def game_screen(window, fase):
     #cria player
     player = Humberto(groups, assets, 100, 100)
     all_sprites.add(player)
-    #define variaveis que serão usadas
+    #define variáveis que serão usadas
     score = 0
     total_ativ = 0
 
@@ -52,15 +52,12 @@ def game_screen(window, fase):
                 all_sprites.add(aluno)  #coloca o inimigo nos sprites
                 all_alunos.add(aluno)
 
-    #ini=0
-
     #cria as variáveis de estados do jogo
     DONE = 5
     PLAYING = 1
     VC_PASSOU = 9
     VC_PERDEU = 3
     VC_GANHOU = 2
-    INSTRUCOES = 6
     state = PLAYING
     keys_down = {}
     #cria Surface mapa
@@ -72,8 +69,6 @@ def game_screen(window, fase):
         
         #assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
-
-
 
         for event in pygame.event.get():  #varre os eventos do jogo
             if event.type == pygame.QUIT:  #verifica se apertou o botão de sair
@@ -191,7 +186,7 @@ def game_screen(window, fase):
         #print('score comeca aqui')
         text_surface = assets['score_font'].render("score: {:02d}".format(score), True, (255, 255, 0))
         text_rect = text_surface.get_rect()
-        text_rect.topleft = (10, 10) #(WIDTH / 2,  10)
+        text_rect.topleft = (10, 10)
         window.blit(text_surface, text_rect)
 
         #mapa.blit(text_surface, text_rect)

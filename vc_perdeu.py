@@ -9,7 +9,6 @@ DONE = 5
 PLAYING = 1
 
 def perdeu_screen(window):
-    clock = pygame.time.Clock()
     font1 = pygame.font.SysFont(None, 80)
     font2 = pygame.font.SysFont(None, 60)
     font3 = pygame.font.SysFont(None, 40)
