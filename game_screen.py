@@ -64,17 +64,13 @@ def game_screen(window, fase):
     state = PLAYING
     keys_down = {}
     #cria Surface mapa
-    mapa = pygame.Surface((3000, 1500))
+    #mapa = pygame.Surface((3000, 1500))
 
     
     #loop principal
-    pygame.mixer.music.load('assets/sdx/Trilha_sonora.wav')
-    pygame.mixer.music.play(-1)
-
-    #assets["Trilha_sonora"].mixer.music.play()
+    
+    pygame.mixer.music.play(-1) #toca a trilha sonora enquanto estiver jogando
     while state in [PLAYING]:
-        assets["Trilha_sonora"].play() #toca a trilha sonora enquanto estiver jogando
-        
         #assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
 
@@ -83,7 +79,7 @@ def game_screen(window, fase):
         for event in pygame.event.get():  #varre os eventos do jogo
             if event.type == pygame.QUIT:  #verifica se apertou o botão de sair
                 state = DONE
-            if state == PLAYING:        
+            if state == PLAYING:
                 if event.type == pygame.KEYDOWN:
                     keys_down[event.key] = True
                     if event.key == pygame.K_SPACE:  #verifica se pressionou espaço
@@ -107,7 +103,7 @@ def game_screen(window, fase):
                         if event.key == pygame.K_RIGHT:
                             player.speedx = 0
                             player.image = assets['humberto']
-            
+                        
 
         all_sprites.update()
 
@@ -136,15 +132,7 @@ def game_screen(window, fase):
             assets["derrotado"].play()
             assets["derrotado"].set_volume(10)
             state = VC_PERDEU #tela vc perdeu
-        
-            #matando aluno
-        if pygame.sprite.spritecollide(player,all_alunos,True):
-            if pygame.sprite.spritecollide(player,all_alunos,True,pygame.sprite.collide_mask):
-                aluno.kill()
-                all_sprites.update() 
-                all_alunos.update()           
-
-    
+            
 
         hits_inimigos = pygame.sprite.groupcollide(all_alunos, all_floors, False, False)
         for aluno in hits_inimigos:
@@ -157,11 +145,11 @@ def game_screen(window, fase):
                     aluno.rect.right = floor.rect.right - 1
                     aluno.speedx = -aluno.speedx
         
+
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         for ativ in hits_atividade:
             assets['coletando_exercicio'].play()
-            assets['coletando_exercicio'].set_volume(1)
-            #o maior valor é 1 hahaha
+            assets['coletando_exercicio'].set_volume(10000000000)
             ativ.kill()
             score+=1
         

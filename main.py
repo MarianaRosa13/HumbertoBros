@@ -16,7 +16,7 @@ pygame.mixer.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Humberto Bros')
 
-pygame.mixer.music.load("assets/sdx/Trilha_sonora.wav")
+
 state = 0
 fase = 1
 while state != DONE:
