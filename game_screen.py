@@ -69,11 +69,11 @@ def game_screen(window, fase):
     
     #loop principal
     pygame.mixer.music.load('assets/sdx/Trilha_sonora.wav')
-    pygame.mixer.music.play(-1)
+    pygame.mixer.music.play()
 
     #assets["Trilha_sonora"].mixer.music.play()
     while state in [PLAYING]:
-        assets["Trilha_sonora"].play() #toca a trilha sonora enquanto estiver jogando
+        #assets["Trilha_sonora"].play() #toca a trilha sonora enquanto estiver jogando
         
         #assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
@@ -113,6 +113,8 @@ def game_screen(window, fase):
 
         if player.rect.bottom > HEIGHT +40:
             pygame.time.delay(TEMP_CAIR)
+            assets["derrotado"].play()
+            assets["derrotado"].set_volume(10)
             state = VC_PERDEU
 
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False, pygame.sprite.collide_mask)
@@ -161,18 +163,18 @@ def game_screen(window, fase):
         for ativ in hits_atividade:
             assets['coletando_exercicio'].play()
             assets['coletando_exercicio'].set_volume(1)
-            #o maior valor é 1 hahaha
             ativ.kill()
             score+=1
         
         hits_cafe = pygame.sprite.spritecollide(player, all_cafes, True)
         if len(hits_cafe) > 0:
-            #assets['coletando_exercicio'].play()
             if fase==3:
                 cafe.kill()
                 if score == total_ativ:
                     state = VC_GANHOU
                 else:
+                    assets["derrotado"].play()
+                    assets["derrotado"].set_volume(10)
                     state = VC_PERDEU
             else:
                 cafe.kill()
