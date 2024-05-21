@@ -3,8 +3,6 @@ import random
 from constantes import *
 from game_screen import *
 
-#pygame.init()
-
 # assets["derrotado"]=pygame.mixer.Sound("assets/sdx/derrotado.wav")
 
 DONE = 5
@@ -18,21 +16,13 @@ def perdeu_screen(window):
     text1 = font1.render('Você perdeu!', True, (255, 0, 0))
     text2 = font2.render('Tenta de novo semestre que vem!', True, (255, 0, 0))
     text3 = font3.render('Pressione enter para recomeçar', True, (255, 0, 0))
-    #inicial = pygame.image.load('assets/img/Fachada-do-Insper-2.png').convert()
-    #Processa os eventos (mouse, teclado, botão, etc)
     running = True
     while running==True:
-        #Ajusta a velocidade do jogo.
-        #clock.tick(FPS)
-        #Processa os eventos (mouse, teclado, botão, etc)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                #state = DONE
                 running = False
             if event.type == pygame.KEYDOWN:
                 #if event.key == pygame.K_KP_ENTER:
-                #state = PLAYING
-                fase='1' #antes
                 running = False
         # assets["derrotado"].play()
         # assets["derrotado"].set_volume(10)

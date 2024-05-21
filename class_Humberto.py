@@ -20,19 +20,21 @@ class Humberto(pygame.sprite.Sprite):
 
     def update(self):
         if self.pulando:
-           self.rect.y += self.speedy
-           self.speedy += 1
+            self.rect.y += self.speedy
+            self.speedy += 1
         self.rect.x += self.speedx
+        #mantém o humberto na tela
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
 
     def pular(self):
-        print('pulou')
         if not self.pulando:
-            self.pulando = True
-            self.speedy -= 20
+           self.pulando = True
+           self.speedy -= 30
+        # if self.speedy == 0:
+        #     self.speedy = -20
 
     def tocou_chao(self):
         self.pulando = False
