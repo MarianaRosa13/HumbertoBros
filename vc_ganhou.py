@@ -17,8 +17,8 @@ def ganhou_screen(window):
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                #if event.key == pygame.K_KP_ENTER:
-                running = False
+                if event.key == pygame.K_RETURN:
+                    running = False
 
         window.fill((255, 255, 0))  # Preenche com a cor amarelo
         window.blit(text1, (130, 160))

@@ -18,19 +18,16 @@ def init_screen(window):
     while running==True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                #state = DONE
                 running = False
             if event.type == pygame.KEYDOWN:
-                #if event.key == pygame.K_KP_ENTER:
                 running = False
-                #keys_down[event.key] = True
                 if event.key == pygame.K_RETURN:
-                    fase = '1'
+                    fase = 1
                     running = False
                     return 1
                 elif event.key == pygame.K_RIGHT:
                     print('direita')
-                    fase='6'
+                    fase= 6
                     running = False
                     return 6
                

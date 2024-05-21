@@ -17,8 +17,8 @@ def passou_screen(window):
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                #if event.key == pygame.K_KP_ENTER:
-                running = False
+                if event.key == pygame.K_RETURN:
+                    running = False
 
         window.fill((0, 0, 255))  # Preenche com a cor azul
         window.blit(text1, (150, 160))
