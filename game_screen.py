@@ -181,10 +181,14 @@ def game_screen(window):
     #cria Surface mapa
     mapa = pygame.Surface((3000, 1500))
 
-    
+    # pygame.mixer.music.play(loops=-1)
     #loop principal
+    pygame.mixer.music.load('assets/sdx/Trilha_sonora.wav')
+    pygame.mixer.music.play(-1)
+
+    #assets["Trilha_sonora"].mixer.music.play()
     while state in [PLAYING]:
-        assets["Trilha_sonora"].play()
+        
         #assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
 
@@ -261,11 +265,12 @@ def game_screen(window):
 
 
 
-
+    
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 state = DONE
-            if state == PLAYING:
+            if state == PLAYING:        
                 if event.type == pygame.KEYDOWN:
                     keys_down[event.key] = True
                     if event.key == pygame.K_SPACE:
@@ -289,7 +294,7 @@ def game_screen(window):
                         if event.key == pygame.K_RIGHT:
                             player.speedx = 0
                             player.image = assets['humberto']
-                        
+            
 
         all_sprites.update()
 
@@ -315,7 +320,15 @@ def game_screen(window):
             assets["derrotado"].play()
             assets["derrotado"].set_volume(10)
             state = VC_PERDEU #tela vc perdeu
-            
+        
+            #matando aluno
+        if pygame.sprite.spritecollide(player,all_alunos,True):
+            if pygame.sprite.spritecollide(player,all_alunos,True,pygame.sprite.collide_mask):
+                aluno.kill()
+                all_sprites.update() 
+                all_alunos.update()           
+
+    
 
         hits_inimigos = pygame.sprite.groupcollide(all_alunos, all_floors, False, False)
         for aluno in hits_inimigos:
@@ -328,12 +341,12 @@ def game_screen(window):
                     aluno.rect.right = floor.rect.right - 1
                     aluno.speedx = -aluno.speedx
         
-
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         if len(hits_atividade) > 0:
             print('sooooommmmm')
             assets['coletando_exercicio'].play()
-            assets['coletando_exercicio'].set_volume(10000000000)
+            assets['coletando_exercicio'].set_volume(1)
+            #o maior valor é 1 hahaha
             ativ.kill()
             score+=1
         

@@ -16,6 +16,7 @@ class Humberto(pygame.sprite.Sprite):
         self.assets = assets 
         self.pulando = True
         self.tempo = pygame.time.get_ticks()
+        
 
     def update(self):
         if self.pulando:

@@ -7,15 +7,16 @@ from class_Humberto import *
 from class_Floor import *
 from vc_passou import *
 from vc_perdeu import *
-
 pygame.init()
 pygame.mixer.init()
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Humberto Bros')
 
-
+pygame.mixer.music.load("assets/sdx/Trilha_sonora.wav")
 state = 0
+
+pygame.mixer.music.play(loops=-1)
 while state != DONE:
     print(state)
     if state == 0:
