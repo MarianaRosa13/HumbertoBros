@@ -57,8 +57,6 @@ def instrucoes_screen(window):
                 all_cafes.add(cafe)
 
     while state in [INSTRUCOES]:
-        # assets["Trilha_sonora"].play()
-        # assets['Trilha_sonora'].set_volume(0.5)
         clock.tick(60)
         for event in pygame.event.get():
             if state == INSTRUCOES:
@@ -89,17 +87,54 @@ def instrucoes_screen(window):
                             player.speedx = 0
                             player.image = assets['humberto']
 
+        # hits_floor = pygame.sprite.spritecollide(player, all_floors, False, pygame.sprite.collide_mask)
+        # for floor in hits_floor:
+        #     player.tocou_chao()
+        #     player.rect.bottom = floor.rect.top
+
+        # print('chao:')
+        # print(hits_floor)
+        # if len(hits_floor) == 0 and not player.pulando:
+        #     player.pulando = False
+        #     player.speedy += 10
+        
+        # hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
+        # for ativ in hits_atividade:
+        #     assets['coletando_exercicio'].play()
+        #     assets['coletando_exercicio'].set_volume(10000000000)
+        #     ativ.kill()
+        #     score+=1
+        
+        # hits_cafe = pygame.sprite.spritecollide(player, all_cafes, True)
+        # if len(hits_cafe) > 0:
+        #     #assets['coletando_exercicio'].play()
+        #     cafe.kill()
+        #     if score == total_ativ:
+        #         state = 1
+        #     else:
+        #         state = VC_PERDEU
+
+
+        all_sprites.update()
+
+        if player.rect.bottom > HEIGHT +40:
+            pygame.time.delay(TEMP_CAIR)
+            assets["derrotado"].play()
+            assets["derrotado"].set_volume(10)
+            state = VC_PERDEU
+
+
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False, pygame.sprite.collide_mask)
         for floor in hits_floor:
             player.tocou_chao()
             player.rect.bottom = floor.rect.top
-            break
-        print('chao:')
-        print(len(hits_floor))
-        if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
-            player.pulando = False
-            player.speedy = 10
         
+        print(player.speedy)
+        if len(hits_floor) == 0 and not player.pulando:
+            player.pulando = False
+            player.speedy += 10
+            print('chao')
+
         hits_atividade = pygame.sprite.spritecollide(player, all_atividades, True)
         for ativ in hits_atividade:
             assets['coletando_exercicio'].play()
@@ -116,8 +151,8 @@ def instrucoes_screen(window):
             else:
                 state = VC_PERDEU
 
-        all_sprites.update()
-        window.fill((0, 0, 0)) 
+
+        window.fill((255, 255, 255)) 
         window.blit(text1, (480, 50))
         window.blit(text2, (280, 120))
         window.blit(text3, (70, 170))
