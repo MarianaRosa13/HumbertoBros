@@ -152,7 +152,7 @@ def instrucoes_screen(window):
                 state = VC_PERDEU
 
 
-        window.fill((255, 255, 255)) 
+        window.fill((0, 0, 0)) 
         window.blit(text1, (480, 50))
         window.blit(text2, (280, 120))
         window.blit(text3, (70, 170))
