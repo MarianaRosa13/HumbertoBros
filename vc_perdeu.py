@@ -23,6 +23,7 @@ def perdeu_screen(window):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     running = False
+                    pygame.mixer.pause()
         # assets["derrotado"].play()
         # assets["derrotado"].set_volume(10)
         window.fill((0, 0, 0))  # Preenche com a cor preto

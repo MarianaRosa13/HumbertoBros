@@ -78,7 +78,7 @@ def game_screen(window, fase):
                     keys_down[event.key] = True
                     if event.key == pygame.K_SPACE:  #verifica se pressionou espaço
                         print('pula')
-                        player.pular()  #função que faz o player pular
+                        player.pular()   #função que faz o player pular
                         assets["pulo"].play()  #executa o som de pulo
                         assets["pulo"].set_volume(10)
                     if event.key == pygame.K_LEFT:  #verifica se pressionou seta para a esquerda
@@ -103,18 +103,21 @@ def game_screen(window, fase):
 
         if player.rect.bottom > HEIGHT +40:
             pygame.time.delay(TEMP_CAIR)
+            assets["derrotado"].play()
+            assets["derrotado"].set_volume(10)
             state = VC_PERDEU
+
 
         hits_floor = pygame.sprite.spritecollide(player, all_floors, False, pygame.sprite.collide_mask)
         for floor in hits_floor:
             player.tocou_chao()
             player.rect.bottom = floor.rect.top
-            
-        print('chao:')
-        print(len(hits_floor))
-        if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
+        
+        print(player.speedy)
+        if len(hits_floor) == 0 and not player.pulando:
             player.pulando = False
-            player.speedy = 10
+            player.speedy += 10
+            print('chao')
         
         '''for pos in chao:
             if player in pos + 1:
