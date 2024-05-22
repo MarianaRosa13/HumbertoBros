@@ -10,7 +10,7 @@ Na tela inicial, se pressionado seta para a direita, há uma tela de instruçõe
 
 VIDEO DE EXPLICAÇÃO E DEMONSTRAÇÃO DO JOGO:
 LINK DO VIDEO AQUI
-
+https://youtu.be/LJalc7hoqI8
 Para jogar, basta executar o arquivo "main". Bom jogo!
 
 
