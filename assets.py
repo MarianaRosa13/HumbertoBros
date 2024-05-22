@@ -42,4 +42,5 @@ def load_assets():
     assets["pulo"]=pygame.mixer.Sound("assets/sdx/pulo.wav")
     assets["Trilha_sonora"]= pygame.mixer.music.load("assets/sdx/Trilha_sonora.wav")
     assets["Venceu_a_fase"]=pygame.mixer.Sound("assets/sdx/venceu a fase.wav")
+
     return assets

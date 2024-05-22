@@ -109,12 +109,21 @@ def game_screen(window, fase):
         for floor in hits_floor:
             player.tocou_chao()
             player.rect.bottom = floor.rect.top
-            break
+            
         print('chao:')
         print(len(hits_floor))
         if len(hits_floor) == 0 and not player.pulando and player.speedy == 0:
             player.pulando = False
             player.speedy = 10
+        
+        '''for pos in chao:
+            if player in pos + 1:
+                player.rect.bottom +=40
+                player.image = assets['humberto_morrendo']
+                pygame.time.delay(TEMP_MORRE)
+                assets["derrotado"].play()
+                assets["derrotado"].set_volume(10)
+                state = VC_PERDEU #tela vc perdeu'''
 
         hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False, pygame.sprite.collide_mask)
         if len(hits_aluno) > 0:
