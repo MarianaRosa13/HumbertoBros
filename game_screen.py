@@ -99,6 +99,24 @@ def game_screen(window, fase):
                             player.image = assets['humberto']
                         
 
+        # all_sprites.update()
+        
+        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False, pygame.sprite.collide_mask)
+        if len(hits_aluno) > 0:
+            aluno.speedx = 0
+            player.speedx = 0
+            player.rect.bottom +=40
+            if player.image == assets['humberto_morrendo']:
+                assets["derrotado"].play()
+                assets["derrotado"].set_volume(10)
+                state = VC_PERDEU #tela vc perdeu
+            pygame.time.delay(TEMP_MORRE)
+            player.image = assets['humberto_morrendo']
+            #pygame.time.delay(TEMP_MORRE)
+            # assets["derrotado"].play()
+            # assets["derrotado"].set_volume(10)
+            # state = VC_PERDEU #tela vc perdeu
+        
         all_sprites.update()
 
         if player.rect.bottom > HEIGHT +40:
@@ -118,26 +136,17 @@ def game_screen(window, fase):
             player.pulando = False
             player.speedy += 10
             print('chao')
-        
-        '''for pos in chao:
-            if player in pos + 1:
-                player.rect.bottom +=40
-                player.image = assets['humberto_morrendo']
-                pygame.time.delay(TEMP_MORRE)
-                assets["derrotado"].play()
-                assets["derrotado"].set_volume(10)
-                state = VC_PERDEU #tela vc perdeu'''
 
-        hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False, pygame.sprite.collide_mask)
-        if len(hits_aluno) > 0:
-            aluno.speedx = 0
-            player.speedx = 0
-            player.rect.bottom +=40
-            player.image = assets['humberto_morrendo']
-            pygame.time.delay(TEMP_MORRE)
-            assets["derrotado"].play()
-            assets["derrotado"].set_volume(10)
-            state = VC_PERDEU #tela vc perdeu
+        # hits_aluno = pygame.sprite.spritecollide(player, all_alunos, False, pygame.sprite.collide_mask)
+        # if len(hits_aluno) > 0:
+        #     aluno.speedx = 0
+        #     player.speedx = 0
+        #     player.rect.bottom +=40
+        #     player.image = assets['humberto_morrendo']
+        #     pygame.time.delay(TEMP_MORRE)
+        #     assets["derrotado"].play()
+        #     assets["derrotado"].set_volume(10)
+        #     state = VC_PERDEU #tela vc perdeu
             
 
         hits_inimigos = pygame.sprite.groupcollide(all_alunos, all_floors, False, False)
@@ -165,12 +174,14 @@ def game_screen(window, fase):
             if fase==3:
                 cafe.kill()
                 if score == total_ativ:
+                    assets["Venceu_a_fase"].play()
                     state = VC_GANHOU
                 else:
                     state = VC_PERDEU
             else:
                 cafe.kill()
                 if score == total_ativ:
+                    assets["Venceu_a_fase"].play()
                     state = VC_PASSOU
                 else:
                     state = VC_PERDEU
