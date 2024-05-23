@@ -8,7 +8,7 @@ O objetivo do jogo é concluir todas as tarefas do dia sem ser pego pelos alunos
 COMO JOGAR:
 Na tela inicial, se pressionado seta para a direita, há uma tela de instruções e simulação antes do começo do jogo.
 
-O JOGO POSSUI 3 FASES '\n'
+O JOGO POSSUI 3 FASES:
 Fase 1:
 ![alt text](image-1.png)
 
@@ -18,18 +18,18 @@ Fase 2:
 Fase 3:
 ![alt text](image-3.png)
 
-VIDEO DE EXPLICAÇÃO E DEMONSTRAÇÃO DO JOGO: \n
+VIDEO DE EXPLICAÇÃO E DEMONSTRAÇÃO DO JOGO:
 https://youtu.be/ezXszNT_y5c
 
 Para jogar, basta possuir o pygame instalado no seu diretório e executar o arquivo "main". Bom jogo!
 
 
-Criadores: \n
-Lucca Niklaus \n
-Mariana Rosa \n
-Stefane Rodrigues \n
+Criadores:
+Lucca Niklaus,
+Mariana Rosa,
+Stefane Rodrigues
 
 
-Créditos: \n
-Efeitos sonoros:https://www.youtube.com/watch?v=EDBhKDuEMoM \n
+Créditos:
+Efeitos sonoros:https://www.youtube.com/watch?v=EDBhKDuEMoM,
 Trilha sonora:https://www.youtube.com/watch?v=mdFrn89x74k
