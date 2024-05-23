@@ -8,7 +8,7 @@ O objetivo do jogo é concluir todas as tarefas do dia sem ser pego pelos alunos
 COMO JOGAR:
 Na tela inicial, se pressionado seta para a direita, há uma tela de instruções e simulação antes do começo do jogo.
 
-O JOGO POSSUI 3 FASES \n
+O JOGO POSSUI 3 FASES '\n'
 Fase 1:
 ![alt text](image-1.png)
 
